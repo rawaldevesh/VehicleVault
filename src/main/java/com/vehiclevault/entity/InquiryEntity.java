@@ -15,10 +15,19 @@ public class InquiryEntity {
     private LocalDate inquiryDate;
     private  String inquiryStatus;
     private String message;
+    private Integer userId;
     
     
     
-    @PrePersist
+    public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	@PrePersist
     protected void onCreate() {
         this.inquiryDate = LocalDate.now(); // Set the date when saving
     }
@@ -41,10 +50,10 @@ public class InquiryEntity {
 	public void setInquiryDate(LocalDate localDate) {
 		this.inquiryDate = localDate;
 	}
-	public String getInqueryStatus() {
+	public String getInquiryStatus() {
 		return inquiryStatus;
 	}
-	public void setInqueryStatus(String inquiryStatus) {
+	public void setInquiryStatus(String inquiryStatus) {
 		this.inquiryStatus = inquiryStatus;
 	}
 	public String getMessage() {

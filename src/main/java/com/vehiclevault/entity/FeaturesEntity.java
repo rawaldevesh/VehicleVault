@@ -9,19 +9,24 @@ public class FeaturesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer featureId;
+    private Integer vehicleId;
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private VehicleEntity vehicle;
-
-    private String name;
+    private String frtureName;
 
     public Integer getFeatureId() { return featureId; }
     public void setFeatureId(Integer featureId) { this.featureId = featureId; }
+	public Integer getVehicleId() {
+		return vehicleId;
+	}
+	public void setVehicleId(Integer vehicleId) {
+		this.vehicleId = vehicleId;
+	}
+	public String getFrtureName() {
+		return frtureName;
+	}
+	public void setFrtureName(String frtureName) {
+		this.frtureName = frtureName;
+	}
 
-    public VehicleEntity getVehicle() { return vehicle; }
-    public void setVehicle(VehicleEntity vehicle) { this.vehicle = vehicle; }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    
 }

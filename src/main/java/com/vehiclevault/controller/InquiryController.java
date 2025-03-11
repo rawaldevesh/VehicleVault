@@ -28,12 +28,12 @@ public class InquiryController {
 	InquiryRepository repositoryInquiry;
 	
 	@GetMapping("newinquery")
-	public String newInquiry(@RequestParam("id") Integer vehicleId, HttpSession session) {
+	public String newInquiry(@RequestParam("id") Integer vehicleId,Integer userId, HttpSession session) {
 	    if (vehicleId == null) {
 	        System.out.println("Error: vehicleId is NULL in newInquiry()");
 	        return "redirect:/searchvehicle"; // Redirect to avoid errors
 	    }
-
+	    session.setAttribute("userId", userId);
 	    session.setAttribute("vehicleId", vehicleId); // Store vehicleId in session
 	    System.out.println("Stored vehicleId in session: " + vehicleId); // Debug Log
 	    return "NewInquiry";
@@ -43,12 +43,14 @@ public class InquiryController {
 	
 	@PostMapping("saveinquiry")
 	public String saveInquiry(InquiryEntity entityInquiry, HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
 	    Integer vehicleId = (Integer) session.getAttribute("vehicleId");
 	    System.out.println("Retrieved vehicleId from session: " + vehicleId); // Debug Log
 	    if (vehicleId == null) {
 	        return "redirect:/buyer-dashboard"; // If session expired, redirect
 	    }
-
+	    entityInquiry.setUserId(userId);
 	    entityInquiry.setVehicleId(vehicleId);
 	    entityInquiry.setInquiryDate(LocalDate.now()); // Set current date
 	    repositoryInquiry.save(entityInquiry);
@@ -58,8 +60,7 @@ public class InquiryController {
 	
 	@GetMapping("listinquiry")
 	public String listInquiry(Model model) {
-		
-		List<InquiryEntity> listInquiry = repositoryInquiry.findAll(); // select *
+		List<Object[]> listInquiry = repositoryInquiry.getAll(); // select *
 		model.addAttribute("listInquiry",listInquiry);
 		return "ListInquiry";
 	}
