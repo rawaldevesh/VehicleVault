@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.vehiclevault.entity.AreaEntity;
 import com.vehiclevault.entity.CityEntity;
+import com.vehiclevault.entity.FeaturesEntity;
+import com.vehiclevault.entity.InsuranceEntity;
 import com.vehiclevault.entity.StateEntity;
 import com.vehiclevault.entity.UserEntity;
 import com.vehiclevault.entity.VehicleEntity;
 import com.vehiclevault.repository.AreaRepository;
 import com.vehiclevault.repository.CityRepository;
+import com.vehiclevault.repository.FeaturesRepository;
+import com.vehiclevault.repository.InsuranceRepository;
 import com.vehiclevault.repository.StateRepository;
 import com.vehiclevault.repository.VehicleRepository;
 
@@ -34,6 +38,13 @@ public class VehicleController {
 	
 	@Autowired
 	StateRepository repositoryState;
+	
+	@Autowired
+	InsuranceRepository repositoryInsurance;
+	
+	@Autowired
+	FeaturesRepository repositoryFeatures;
+	
 	@GetMapping("newvehicle")
 	public String newvehicle(Model model, HttpSession session) {
 		
@@ -45,6 +56,13 @@ public class VehicleController {
 		
 		List<AreaEntity> allArea = repositoryArea.findAll();
 		model.addAttribute("allArea",allArea);
+		
+		List<InsuranceEntity> allInsurance = repositoryInsurance.findAll();
+		model.addAttribute("allInsurance",allInsurance);
+		
+		List<FeaturesEntity> allFeatures = repositoryFeatures.findAll();
+		model.addAttribute("allFeatures",allFeatures);
+		
 		return "NewVehicle";
 	}
 	
@@ -56,7 +74,7 @@ public class VehicleController {
 	    if (user == null) {
 	        return "redirect:/login"; // If session expired, redirect to login
 	    }
-
+	    
 	    entityVehicle.setUserId(user.getUserId());
 	    repositoryVehicle.save(entityVehicle);
 	    

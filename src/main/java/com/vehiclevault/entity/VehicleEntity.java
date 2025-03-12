@@ -32,6 +32,7 @@ public class VehicleEntity {
     private	Integer stateId;
     private	Date registrationYear;
     private	String insurance;
+    private String features;
     private	String seats;
     private	String kmsDriven;
     private	String rTO;
@@ -194,7 +195,14 @@ public class VehicleEntity {
 	public void setNumberofBags(String numberofBags) {
 		this.numberofBags = numberofBags;
 	}
+	public String getFeatures() {
+		return features;
+	}
+	public void setFeatures(String features) {
+		this.features = features;
+	}
     
+	
     
     
 	

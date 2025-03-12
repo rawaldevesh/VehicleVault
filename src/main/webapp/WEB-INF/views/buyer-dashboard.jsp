@@ -179,5 +179,7 @@
             content.classList.toggle('collapsed');
         });
     </script>
+     <input type="hidden" name="userId" value="${sessionScope.userId}">
+     
 </body>
 </html>
