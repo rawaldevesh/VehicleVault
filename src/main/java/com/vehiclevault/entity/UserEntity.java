@@ -23,10 +23,11 @@ public class UserEntity {
     private String bornYear;
     private String gender;
     private String otp;
-    
-   
 	private String role; // BUYER, SELLER, ADMIN
-
+	
+	private String profilePicPath;
+	
+	
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }
 
@@ -64,4 +65,14 @@ public class UserEntity {
 	public void setOtp(String otp) {
 		this.otp = otp;
 	}
+	public String getProfilePicPath() {
+		return profilePicPath;
+	}
+	public void setProfilePicPath(String profilePicPath) {
+		this.profilePicPath = profilePicPath;
+	}
+	
+	
+	
+	
 }

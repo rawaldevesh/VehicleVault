@@ -126,7 +126,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for ="profilrPic" class="form-label">Profile Pic:</label>
-                                <input type="file" id="profilrPic" name="profilePic" class="form-control" placeholder = "Profile" required>
+                                <input type="file" id="profilrPic" name="profilePic" class="form-control" placeholder = "ProfilePic only .png and .jpg" required>
                             </div>
                         </div>
                     </div>

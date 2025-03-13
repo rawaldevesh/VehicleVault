@@ -1,5 +1,7 @@
 package com.vehiclevault.controller;
 
+import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.vehiclevault.entity.UserEntity;
 import com.vehiclevault.repository.UserRepository;
 import com.vehiclevault.service.MailService;
@@ -28,6 +32,9 @@ public class SessionController {
 
 	@Autowired
 	PasswordEncoder encoder;
+	
+	@Autowired
+	Cloudinary cloudinary;
 
 	@GetMapping(value = {"/","signup"}) //url 
 	public String signup() {
@@ -45,6 +52,27 @@ public class SessionController {
 	        model.addAttribute("error", "Passwords do not match");
 	        return "Signup";
 	    }
+		
+		if(profilePic.getOriginalFilename().endsWith(".jpg") || profilePic.getOriginalFilename().endsWith(".png")) {
+			
+		}
+		else {
+			return "Signup";
+		}
+		
+		try {
+		 Map result =   cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
+		
+		 userEntity.setProfilePicPath(result.get("url").toString());
+		
+		} 
+		
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		String encPassword = encoder.encode(userEntity.getPassword());
 		userEntity.setPassword(encPassword);
 		// memory

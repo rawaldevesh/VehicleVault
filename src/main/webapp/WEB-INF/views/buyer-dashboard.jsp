@@ -125,8 +125,8 @@
     <div class="sidebar">
         <a href="buyer-dashboard"><i class="fas fa-home"></i> Dashboard</a>
         <a href="searchvehicle"><i class="fas fa-car"></i> Browse Vehicles</a>
-        <a href="myInquiries.jsp"><i class="fas fa-envelope"></i> My Inquiries</a>
-        <a href="profile.jsp"><i class="fas fa-user"></i> Profile Settings</a>
+        <a href="myInquiries"><i class="fas fa-envelope"></i> My Inquiries</a>
+        <a href="profile"><i class="fas fa-user"></i> Profile</a>
         <a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 

@@ -51,6 +51,7 @@
         <a href="newstate"><i class="fas fa-car"></i>Add New State</a>
         <a href="newarea"><i class="fas fa-car"></i>Add New Area</a>
         <a href="listvehicle"><i class="fas fa-car"></i> Browse Vehicles</a>
+        <a href="profile"><i class="fas fa-user"></i> Profile</a>
        
         <a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>

@@ -37,5 +37,10 @@ public class UserController {
 		return "SearchVehicle";
 	}
 	
+	@GetMapping("profile")
+	public String profile() {
+		return "Profile";
+	}
+	
 	
 }
