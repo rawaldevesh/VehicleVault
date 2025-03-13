@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.vehiclevault.entity.UserEntity;
 import com.vehiclevault.repository.UserRepository;
@@ -39,7 +40,7 @@ public class SessionController {
 	}
 	
 	@PostMapping("saveuser")
-	public String saveuser(UserEntity userEntity, String confpassword, Model model) {
+	public String saveuser(UserEntity userEntity, String confpassword, Model model,MultipartFile profilePic) {
 		if (!userEntity.getPassword().equals(confpassword)) {
 	        model.addAttribute("error", "Passwords do not match");
 	        return "Signup";
@@ -49,7 +50,7 @@ public class SessionController {
 		// memory
 		// bcrypt singleton -> single object -> autowired
 		
-		
+		System.out.println(profilePic.getOriginalFilename());
 		repositoryUser.save(userEntity);
 		// send mail
 		serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());

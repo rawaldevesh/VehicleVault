@@ -66,7 +66,7 @@
         <div class="col-md-10">
             <div class="card shadow-lg p-4">
                 <h2 class="text-center mb-4">Signup</h2>
-                <form action="saveuser" method="post">
+                <form action="saveuser" method="post" enctype = "multipart/form-data">
                     <div class="row">
                         <!-- Left Column -->
                         <div class="col-md-6">
@@ -123,6 +123,10 @@
                             <div class="mb-3">
                                 <label for="city" class="form-label">City:</label>
                                 <input type="text" id="city" name="city" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for ="profilrPic" class="form-label">Profile Pic:</label>
+                                <input type="file" id="profilrPic" name="profilePic" class="form-control" placeholder = "Profile" required>
                             </div>
                         </div>
                     </div>
