@@ -10,8 +10,8 @@ public class FeaturesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer featureId;
     
-    private Integer vehicleId;
-    private String frtureName;
+   
+    private String featureName;
     
     
 	public Integer getFeatureId() {
@@ -20,18 +20,14 @@ public class FeaturesEntity {
 	public void setFeatureId(Integer featureId) {
 		this.featureId = featureId;
 	}
-	public Integer getVehicleId() {
-		return vehicleId;
+	public String getFeatureName() {
+		return featureName;
 	}
-	public void setVehicleId(Integer vehicleId) {
-		this.vehicleId = vehicleId;
+	public void setFeatureName(String featureName) {
+		this.featureName = featureName;
 	}
-	public String getFrtureName() {
-		return frtureName;
-	}
-	public void setFrtureName(String frtureName) {
-		this.frtureName = frtureName;
-	}
+	
+	
 
     
 

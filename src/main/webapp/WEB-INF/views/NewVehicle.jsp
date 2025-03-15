@@ -67,8 +67,28 @@
                 <label>Registration Year:</label>
                 <input type="date" name="registrationYear" class="form-control"><br>
 
-                <label>Insurance:</label>
-                <input type="text" name="insurance" class="form-control"><br>
+                Insurance Type:
+     			<select name="insuranceId">
+     				<option>Select Insurance Type</option>
+     			<c:forEach items = "${allInsurance}" var ="Insurance" >
+     			
+     			<option value="${Insurance.insuranceId}">${Insurance.insuranceType}</option>
+     					
+     			</c:forEach>
+     			</select><br>
+     			
+     			Feature Name:
+				<select name="featureId">
+     				<option>Select Features</option>
+     			<c:forEach items = "${allFeatures}" var ="f" >
+     			
+     			<option value="${f.featureId}">${f.featureName}</option>
+     					
+     			</c:forEach>
+     			</select>
+     			
+     			
+     		
 
                 <label>Seats:</label>
                 <input type="number" name="seats" class="form-control"><br>

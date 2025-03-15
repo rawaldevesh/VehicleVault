@@ -50,6 +50,9 @@
         <a href="newcity"><i class="fas fa-car"></i>Add New City</a>
         <a href="newstate"><i class="fas fa-car"></i>Add New State</a>
         <a href="newarea"><i class="fas fa-car"></i>Add New Area</a>
+        <a href="newinsurance"><i class="fas fa-car"></i>Add New Insurance</a>
+        <a href="newfeatures"><i class="fas fa-car"></i>Add New Features</a>
+        
         <a href="listvehicle"><i class="fas fa-car"></i> Browse Vehicles</a>
         <a href="profile"><i class="fas fa-user"></i> Profile</a>
        

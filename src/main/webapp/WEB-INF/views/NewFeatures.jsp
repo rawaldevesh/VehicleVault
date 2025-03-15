@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add Feature</title>
+<title>Add Features</title>
 </head>
 <body>
 
 
-	<form action = "savesfeature" method ="post">
+	<form action = "savefeatures" method ="post">
      		Feature Name  : <input type = "text" name ="featureName" /><br></br>
      		<br>
-     		<input type ="submit" value = "Save State"/>
+     		<input type ="submit" value = "Save Features"/>
      </form>
 
 </body>

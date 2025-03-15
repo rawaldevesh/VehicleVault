@@ -63,6 +63,8 @@ public class VehicleController {
 		List<FeaturesEntity> allFeatures = repositoryFeatures.findAll();
 		model.addAttribute("allFeatures",allFeatures);
 		
+		
+		
 		return "NewVehicle";
 	}
 	
