@@ -68,8 +68,9 @@
                     <td>${vehicle.numberofBags}</td>
                     <td>
                         <a href="editVehicle?id=${vehicle.vehicleId}" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="deleteVehicle?id=${vehicle.vehicleId}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                    </td>
+						<a href="deleteVehicle?id=${vehicle.vehicleId}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+
+					</td>
                 </tr>
             </c:forEach>
         </tbody>

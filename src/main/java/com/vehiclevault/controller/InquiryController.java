@@ -71,7 +71,38 @@ public class InquiryController {
 		model.addAttribute("listInquiry",listInquiry);
 		return "ListInquiry";
 	}
+	
+	
+	@GetMapping("myInquiries")
+	public String MyInquiries(Model model) {
+		List<Object[]> listInquiry = repositoryInquiry.getAll(); // select *
+		model.addAttribute("listInquiry",listInquiry);
+		return "MyInquiries";
+	}
+	
+	@PostMapping("toggleInquiryStatus")
+	public String toggleInquiryStatus(@RequestParam("id") Integer inquiryId) {
+	    InquiryEntity inquiry = repositoryInquiry.findById(inquiryId).orElse(null);
+	    
+	    if (inquiry != null) {
+	        String newStatus = inquiry.getInquiryStatus().equals("ON") ? "OFF" : "ON";
+	        inquiry.setInquiryStatus(newStatus);
+	        repositoryInquiry.save(inquiry);
+	    }
+	    
+	    return "redirect:/listinquiry"; // Redirect to the list
+	}
 
+	
+	
+	@GetMapping("deleteInquiry")
+	public String deleteInquiry(@RequestParam("id") Integer inquiryId) {
+	    repositoryInquiry.deleteById(inquiryId);
+	    return "redirect:/listvehicle"; // Redirect to vehicle list
+	}
+
+	
+	
 }
 
 

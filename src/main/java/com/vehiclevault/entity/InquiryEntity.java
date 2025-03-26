@@ -13,11 +13,14 @@ public class InquiryEntity {
     private Integer inquiryId;
     private Integer vehicleId;
     private LocalDate inquiryDate;
-    private  String inquiryStatus;
+    private  String inquiryStatus = "ON";
     private String message;
     private Integer userId;
     
     
+    public InquiryEntity() {
+        this.inquiryStatus = "ON"; // Default status when object is created
+    }
     
     public Integer getUserId() {
 		return userId;
@@ -50,12 +53,18 @@ public class InquiryEntity {
 	public void setInquiryDate(LocalDate localDate) {
 		this.inquiryDate = localDate;
 	}
+	
+	
+	
 	public String getInquiryStatus() {
 		return inquiryStatus;
 	}
+
 	public void setInquiryStatus(String inquiryStatus) {
 		this.inquiryStatus = inquiryStatus;
 	}
+
+	
 	public String getMessage() {
 		return message;
 	}

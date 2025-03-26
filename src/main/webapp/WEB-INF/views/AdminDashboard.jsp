@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 
 			<ul>
                 <li><a href="listvehicle">List Vehicles</a></li>
-                <li><a href="buyer-inquiries">Buyer Inquiries</a></li>
+                <li><a href="listinquiry">Buyer Inquiries</a></li>
                 <li><a href="listuser">List Users</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vehiclevault.entity.AreaEntity;
 import com.vehiclevault.entity.CityEntity;
@@ -91,6 +92,38 @@ public class VehicleController {
 		model.addAttribute("listVehicle", listVehicle);
 		return "ListVehicle";
 	}
+	
+	
+	//editevehicle
+	
+	@GetMapping("editVehicle")
+	public String editVehicle(@RequestParam("id") Integer vehicleId, Model model) {
+	    VehicleEntity vehicle = repositoryVehicle.findById(vehicleId).orElse(null);
+	    
+	    if (vehicle == null) {
+	        return "redirect:/listvehicle"; // If vehicle not found, redirect to list
+	    }
+	    
+	    model.addAttribute("vehicle", vehicle);
+	    
+	    return "EditVehicle"; // JSP page for editing
+	}
+	
+	//updating vehicle
+	@PostMapping("updateVehicle")
+	public String updateVehicle(VehicleEntity updatedVehicle) {
+	    repositoryVehicle.save(updatedVehicle); // Save the updated vehicle
+	    return "redirect:/listvehicle"; // Redirect to vehicle list page
+	}
+	
+	@GetMapping("deleteVehicle")
+	public String deleteVehicle(@RequestParam("id") Integer vehicleId) {
+	    repositoryVehicle.deleteById(vehicleId);
+	    return "redirect:/listvehicle"; // Redirect to vehicle list
+	}
+
+
+
 	
 	
 }
