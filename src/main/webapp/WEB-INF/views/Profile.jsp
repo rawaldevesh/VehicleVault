@@ -56,7 +56,7 @@
                 
             </div>
             
-            <a href="editProfile" class="btn btn-primary">Edit Profile</a>
+            
             <a href="logout" class="btn btn-danger logout-btn">Logout</a>
         </div>
     </c:if>

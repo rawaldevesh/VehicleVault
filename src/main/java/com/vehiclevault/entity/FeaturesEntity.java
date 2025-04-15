@@ -1,5 +1,7 @@
 package com.vehiclevault.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class FeaturesEntity {
    
     private String featureName;
     
+    @ManyToMany(mappedBy = "featuresEntities")
+    private List<VehicleEntity> vehicles;
+
     
 	public Integer getFeatureId() {
 		return featureId;

@@ -125,8 +125,8 @@
                                 <input type="text" id="city" name="city" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label for ="profilrPic" class="form-label">Profile Pic:</label>
-                                <input type="file" id="profilrPic" name="profilePic" class="form-control" placeholder = "ProfilePic only .png and .jpg" required>
+                                <label for ="profilePic" class="form-label">Profile Pic:</label>
+                                <input type="file" id="profilePic" name="profilePic" class="form-control" placeholder = "ProfilePic only .png and .jpg" required>
                             </div>
                         </div>
                     </div>

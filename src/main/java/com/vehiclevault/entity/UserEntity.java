@@ -1,7 +1,16 @@
 package com.vehiclevault.entity;
 
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -26,6 +35,19 @@ public class UserEntity {
 	private String role; // BUYER, SELLER, ADMIN
 	
 	private String profilePicPath;
+	
+	@CreationTimestamp
+	@Column(name = "created_at", updatable = false)
+	private LocalDateTime createdAt;
+
+	public LocalDateTime getCreatedAt() {
+	    return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+	    this.createdAt = createdAt;
+	}
+
 	
 	
     public Integer getUserId() { return userId; }

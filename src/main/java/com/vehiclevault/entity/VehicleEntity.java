@@ -2,6 +2,9 @@ package com.vehiclevault.entity;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -14,6 +17,7 @@ public class VehicleEntity {
     private Integer vehicleId;
 
     private String make;
+    private String vehicleType;
     private String model;
     private Integer year;
     private String variant;
@@ -24,7 +28,7 @@ public class VehicleEntity {
     private	String color;
     private	String description;
     private	String status;
-    private Date listingDate;
+    private LocalDate listingDate;
     private String registrationNum;
     private	Integer userId;
     private	Integer cityId;
@@ -39,6 +43,30 @@ public class VehicleEntity {
     private	String ownerShip;
     private	String engineDisplacement;
     private	String numberofBags;
+    private String carPicPath;
+    private String vehicleStatus = "PENDING"; // default when seller adds
+    
+    
+    @ManyToMany
+    @JoinTable(
+        name = "vehicle_features",
+        joinColumns = @JoinColumn(name = "vehicle_id"),
+        inverseJoinColumns = @JoinColumn(name = "feature_id")
+    )
+    private List<FeaturesEntity> featuresEntities = new ArrayList<>();
+
+    
+    public List<FeaturesEntity> getFeaturesEntities() {
+        return featuresEntities;
+    }
+
+    public void setFeaturesEntities(List<FeaturesEntity> featuresEntities) {
+        this.featuresEntities = featuresEntities;
+    }
+
+    
+    
+    
 	public Integer getVehicleId() {
 		return vehicleId;
 	}
@@ -54,6 +82,15 @@ public class VehicleEntity {
 	public String getModel() {
 		return model;
 	}
+	
+	public String getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
 	public void setModel(String model) {
 		this.model = model;
 	}
@@ -111,11 +148,11 @@ public class VehicleEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getListingDate() {
+	public LocalDate getListingDate() {
 		return listingDate;
 	}
-	public void setListingDate(Date listingDate) {
-		this.listingDate = listingDate;
+	public void setListingDate(LocalDate localDate) {
+		this.listingDate = localDate;
 	}
 	public String getRegistrationNum() {
 		return registrationNum;
@@ -201,6 +238,22 @@ public class VehicleEntity {
 	public void setFeatures(String features) {
 		this.features = features;
 	}
+	public String getCarPicPath() {
+		return carPicPath;
+	}
+	public void setCarPicPath(String carPicPath) {
+		this.carPicPath = carPicPath;
+	}
+	public String getVehicleStatus() {
+		return vehicleStatus;
+	}
+	public void setVehicleStatus(String vehicleStatus) {
+		this.vehicleStatus = vehicleStatus;
+	}
+	
+	
+	
+
     
 	
     

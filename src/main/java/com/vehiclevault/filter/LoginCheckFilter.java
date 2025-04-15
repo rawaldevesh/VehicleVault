@@ -29,34 +29,60 @@ public class LoginCheckFilter implements Filter {
 		publicURL.add("/authenticate");
 		publicURL.add("/logout");
 		publicURL.add("/updatepassword");
+		publicURL.add("/home");
+		publicURL.add("//");
+		publicURL.add("/hvehiclevault");
+		
+		
+		
 
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-
-		HttpServletRequest req = (HttpServletRequest) request;
-
-		String url = req.getRequestURL().toString();
-		String uri = req.getRequestURI();
-
-		//System.out.println("Filter Call....." + uri);
-
+		HttpServletRequest requestHttp = (HttpServletRequest) request;
+		String url = requestHttp.getRequestURI().toString();
+		String uri = requestHttp.getRequestURI();
+ 
 		
-		if (publicURL.contains(uri) || uri.contains(".css") || uri.contains(".js") || uri.contains("dist") || uri.contains("images")) {
-			chain.doFilter(request, response);//go ahead 
+		System.out.println("Filter Call...." + uri);
+
+		if (publicURL.contains(uri) || uri.contains(".css") || uri.contains(".js") || uri.contains("dist")
+				|| uri.contains("images")) {
+			chain.doFilter(requestHttp, response);// go Ahead
 		} else {
-			HttpSession session = req.getSession();
+			HttpSession session = requestHttp.getSession();
 			UserEntity user = (UserEntity) session.getAttribute("user");
 
 			if (user == null) {
-					req.getRequestDispatcher("login").forward(request, response);			
-			}else {
-				
-				chain.doFilter(request, response);//go ahead 
+				requestHttp.getRequestDispatcher("login").forward(request, response);
+			} else {
+	            // Role-based access check
+	            if (uri.startsWith("/admin")) {
+	                if ("ADMIN".equals(user.getRole())) {
+	                    chain.doFilter(request, response);
+	                } else {
+	                    requestHttp.getRequestDispatcher("login").forward(request, response);
+	                }
+	            } else if (uri.startsWith("/seller")) {
+	                if ("SELLER".equals(user.getRole())) {
+	                    chain.doFilter(request, response);
+	                } else {
+	                    requestHttp.getRequestDispatcher("login").forward(request, response);
+	                }
+	            } else if (uri.startsWith("/buyer")) {
+	                if ("BUYER".equals(user.getRole())) {
+	                    chain.doFilter(request, response);
+	                } else {
+	                    requestHttp.getRequestDispatcher("login").forward(request, response);
+	                }
+	            } else {
+	                chain.doFilter(request, response); // Common pages
+	            }
+				// user role admin ?
+
 			}
 		}
-
-		// go ahead
+		// go Ahead
 	}
-}
+}// go Ahead
