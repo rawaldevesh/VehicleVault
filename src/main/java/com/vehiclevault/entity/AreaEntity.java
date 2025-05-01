@@ -13,11 +13,12 @@ public class AreaEntity {
     @Column(nullable = false)
     private String areaName;
 
-    @Column(name = "city_id", insertable = false, updatable = false)
+    @Column(name = "city_id", nullable = false)
     private Integer cityId;
 
-    @Column(name = "state_id", insertable = false, updatable = false)
+    @Column(name = "state_id", nullable = false)
     private Integer stateId;
+
 
     @Column
     private String cityName;

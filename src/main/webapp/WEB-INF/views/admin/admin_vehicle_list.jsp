@@ -23,6 +23,7 @@
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -70,76 +71,78 @@
       <%@ include file="admin_sidebar.jsp" %>
       <!--end::Sidebar-->
       <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Vehicle List</h3></div>
-              
-            <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
-                  <div class="card-body">
-                    <table id="listVehicleTable" class="table table-bordered">
-                      <thead>
-                     <tr>
-                        <th>ID</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Year</th>
-                        <th>Variant</th>
-                        <th>Fuel Type</th>
-                        <th>Price (₹)</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <c:forEach var="vehicle" items="${listVehicle}">
-            
-                        <tr>
-                            <td>${vehicle.vehicleId}</td>
-                            <td>${vehicle.make}</td>
-                            <td>${vehicle.model}</td>
-                            <td>${vehicle.year}</td>
-                            <td>${vehicle.variant}</td>
-                            <td>${vehicle.fuelType}</td>
-                            <td>${vehicle.price}</td>
-                            <td>${vehicle.vehicleStatus}</td>
-                            <td>
-                                <a href="adminviewvehicle?id=${vehicle.vehicleId}">View</a>
-                                <a href="/admin/approve-vehicle/${vehicle.vehicleId}">Approve</a> 
-                                <a href="/admin/reject-vehicle/${vehicle.vehicleId}">Reject</a>
-                                
-                           		
-                            </td>
-                            
-                        </tr>
-                        
+     <main class="app-main">
+  <!-- App Content Header -->
+  <div class="app-content-header">
+    <div class="container-fluid">
+      
+       <div class="row" style="min-height: 400px;">
+        <div class="col-12 mb-3">
+          <h3 class="mb-0">Vehicle List</h3>
+        </div>
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Download Button -->
+              <div class="mb-3">
+                <button class="btn btn-outline-primary" onclick="downloadCSV('pending-vehicles.csv')">
+                  <i class="fas fa-download me-1"></i> Download CSV
+                </button>
+              </div>
+
+              <!-- Vehicle Table -->
+              <div class="table-responsive">
+                <table id="listVehicleTable" class="table table-bordered table-hover">
+                  <thead class="table-light">
+                    <tr>
+                      <th>ID</th>
+                      <th>Make</th>
+                      <th>Model</th>
+                      <th>Year</th>
+                      <th>Variant</th>
+                      <th>Fuel Type</th>
+                      <th>Price (₹)</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <c:forEach var="vehicle" items="${listVehicle}">
+                      <tr>
+                        <td>${vehicle.vehicleId}</td>
+                        <td>${vehicle.make}</td>
+                        <td>${vehicle.model}</td>
+                        <td>${vehicle.year}</td>
+                        <td>${vehicle.variant}</td>
+                        <td>${vehicle.fuelType}</td>
+                        <td>${vehicle.price}</td>
+                        <td>${vehicle.vehicleStatus}</td>
+                        <td>
+						  <div class="d-flex justify-content-center flex-wrap gap-1">
+						    <a href="adminviewvehicle?id=${vehicle.vehicleId}" class="btn btn-sm btn-info me-1">View</a>
+						    <a href="/admin/approve-vehicle/${vehicle.vehicleId}" class="btn btn-sm btn-success me-1">Approve</a>
+						    <a href="/admin/reject-vehicle/${vehicle.vehicleId}" class="btn btn-sm btn-danger">Reject</a>
+						  </div>
+						</td>
+
+                      </tr>
                     </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-end">
-                      <li class="page-item"><a class="page-link" href="#">«</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </main>
-                </div>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
                 
        
             
@@ -148,11 +151,31 @@
             
 
 
+<!-- jQuery (first!) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Your DataTable init -->
+<script>
+  $(document).ready(function () {
+    $('#listVehicleTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true
+    });
+  });
+</script>
 
     
-    <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script
       src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
       integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="

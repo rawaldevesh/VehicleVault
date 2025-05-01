@@ -79,56 +79,86 @@
       <!--end::Header-->
       <!--begin::Sidebar-->
       <%@ include file="sidebar.jsp" %>
-        <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
-              
+       <main class="app-main">
+  <!--begin::App Content Header-->
+  <div class="app-content-header py-4">
+    <div class="container-fluid">
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <h3 class="mb-0">Dashboard</h3>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <!-- Total Vehicles -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-start border-primary border-4 shadow-sm h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">My Total Vehicles</p>
+                <h3 class="fw-bold mb-0">${totalVehicles}</h3>
+              </div>
+              <i class="bi bi-car-front-fill text-primary fs-1"></i>
             </div>
-            <!--end::Row-->
+            <a href="sellervehiclelist" class="card-footer text-decoration-none text-primary small">
+              List Vehicles <i class="bi bi-arrow-right"></i>
+            </a>
           </div>
-          <!--end::Container-->
-        <div class="row">
-              <!--begin::Col-->
-              <div class="col-lg-3 col-6">
-                <!--begin::Small Box Widget 1-->
-                <div class="small-box text-bg-primary">
-                  <div class="inner">
-                    <h3>${totalVehicles}</h3>
-                    <p>Total Vehicles</p>
-                  </div>
-                  <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
-                  </svg>
-                  <a href="sellervehiclelist" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-                    List Vehicles <i class="bi bi-link-45deg"></i>
-                  </a>
-                </div>
-                <!--end::Small Box Widget 1-->
+        </div>
+
+        <!-- Vehicles This Month -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-start border-success border-4 shadow-sm h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">Listed This Month</p>
+                <h3 class="fw-bold mb-0">${vehiclesThisMonth}</h3>
               </div>
-              <div class="col-lg-3 col-6">
-                <!--begin::Small Box Widget 4-->
-                <div class="small-box text-bg-danger">
-                  <div class="inner">
-                    <h3>${totalInquiries}</h3>
-                    <p>Vehicle Inquiries</p>
-                  </div>
-                  <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path clip-rule="evenodd" fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 018.25-8.25.75.75 0 01.75.75v6.75H18a.75.75 0 01.75.75 8.25 8.25 0 01-16.5 0z"></path>
-                    <path clip-rule="evenodd" fill-rule="evenodd" d="M12.75 3a.75.75 0 01.75-.75 8.25 8.25 0 018.25 8.25.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75V3z"></path>
-                  </svg>
-                  <a href="#" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-                    List Inquiries <i class="bi bi-link-45deg"></i>
-                  </a>
-                </div>
+              <i class="bi bi-calendar-plus text-success fs-1"></i>
+            </div>
+            <a href="sellervehiclelist" class="card-footer text-decoration-none text-success small">
+              View Listings <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Total Inquiries -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-start border-danger border-4 shadow-sm h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">Total Inquiries</p>
+                <h3 class="fw-bold mb-0">${totalInquiries}</h3>
               </div>
-         </div>
-         </div>
-         </main>
+              <i class="bi bi-chat-dots-fill text-danger fs-1"></i>
+            </div>
+            <a href="sellerlistinquiry" class="card-footer text-decoration-none text-danger small">
+              View Inquiries <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Inquiries This Month -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card border-start border-warning border-4 shadow-sm h-100">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+                <p class="text-muted mb-1">This Month's Inquiries</p>
+                <h3 class="fw-bold mb-0">${inquiriesThisMonth}</h3>
+              </div>
+              <i class="bi bi-envelope-open text-warning fs-1"></i>
+            </div>
+            <a href="sellerlistinquiry" class="card-footer text-decoration-none text-warning small">
+              View Details <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
          </div>
          
              

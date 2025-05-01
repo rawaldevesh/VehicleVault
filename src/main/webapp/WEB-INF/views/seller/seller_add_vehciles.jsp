@@ -209,27 +209,44 @@
                     </div>
 
                     <!-- Insurance -->
-                    <div class="col-md-6">
-                        <label class="form-label">Insurance Type</label>
-                        <select name="insuranceId" class="form-select">
-                            <c:forEach items="${allInsurance}" var="i">
-                                <option value="${i.insuranceId}">${i.insuranceType}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+<div class="col-md-6">
+    <label class="form-label">Insurance Type</label>
+    <select name="insuranceId" class="form-select" required>
+        <option value="" disabled selected>Please select an insurance type</option> <!-- Default option -->
+        <c:forEach items="${allInsurance}" var="i">
+            <option value="${i.insuranceId}">${i.insuranceType}</option>
+        </c:forEach>
+    </select>
+</div>
 
-                    <!-- Features -->
-                    <div class="col-md-6">
-                        <label class="form-label">Features</label><br/>
-                        <div class="form-check">
-                            <c:forEach var="feature" items="${allFeatures}">
-                                <div>
-                                    <input class="form-check-input" type="checkbox" name="featureIds" value="${feature.featureId}">
-                                    <label class="form-check-label">${feature.featureName}</label>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
+
+<!-- Add Vehicle JSP: features section -->
+<div class="col-md-6 mb-3">
+    <label class="form-label">Features</label>
+    <div class="form-check">
+        <c:forEach var="feature" items="${allFeatures}">
+            <c:set var="isChecked" value="false" />
+            <c:forEach var="f" items="${vehicle.featuresEntities}">
+                <c:if test="${f.featureId == feature.featureId}">
+                    <c:set var="isChecked" value="true" />
+                </c:if>
+            </c:forEach>
+
+            <div class="form-check mb-1">
+                <input class="form-check-input" type="checkbox" name="featureIds" 
+                       value="${feature.featureId}"
+                       <c:if test="${isChecked}">checked</c:if>>
+                <label class="form-check-label">
+                    ${feature.featureName}
+                </label>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+
+
+
+
 
                     <!-- Extra Info -->
                     <div class="col-md-4">

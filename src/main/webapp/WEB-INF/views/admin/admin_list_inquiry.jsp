@@ -21,6 +21,7 @@
       name="keywords"
       content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard"
     />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
     <link
@@ -71,76 +72,82 @@
       <!--end::Sidebar-->
       <!--begin::App Main-->
       <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Inquiry List</h3></div>
-              
-            <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
-                  <div class="card-body">
-                    <table id="listInquiryTable" class="table table-bordered">
-                      <thead>
+  <!--begin::App Content Header-->
+  <div class="app-content-header">
+    <!--begin::Container-->
+    <div class="container-fluid">
+      <!--begin::Row-->
+      <div class="row" style="min-height: 400px;">
+        <div class="col-12 mb-3">
+          <h3 class="mb-0">Inquiry List</h3>
+        </div>
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Download Button -->
+              <div class="mb-3">
+                <button class="btn btn-outline-primary" onclick="downloadCSV('pending-vehicles.csv')">
+                  <i class="fas fa-download me-1"></i> Download CSV
+                </button>
+              </div>
+
+              <!-- Inquiry Table -->
+              <div class="table-responsive">
+                <table id="listInquiryTable" class="table table-bordered table-hover">
+                  <thead class="table-light">
                     <tr>
-                        <th>Inquiry ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Contact Number</th>
-                        <th>Email</th>
-                        <th>Vehicle Model</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                      <th>Inquiry ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Contact Number</th>
+                      <th>Email</th>
+                      <th>Vehicle Model</th>
+                      <th>Message</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
                     </tr>
-                </thead>
-                <tbody>
+                  </thead>
+                  <tbody>
                     <c:forEach var="i" items="${listInquiry}">
-                        <tr>
-                            <td>${i[3]}</td>
-                            <td>${i[4]}</td>
-                            <td>${i[5]}</td>
-                            <td>${i[6]}</td>
-                            <td>${i[7]}</td>
-                            <td>${i[8]}</td>
-                            <td>${i[0]}</td>
-                            <td>${i[1]}</td>
-                            <td>${i[9]}</td>
-                            <td>
-                                <a href="admindeleteinquiry?id=${i[2]}">Delete</a> |
-                                <form action="admintoggleInquiryStatus" method="post" style="display:inline;">
-                                    <input type="hidden" name="id" value="${i[2]}">
-                                    <button type="submit">
-                                        ${i[9] == 'ON' ? 'Disable' : 'Enable'}
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                      <tr>
+                        <td>${i[2]}</td>
+                        <td>${i[4]}</td>
+                        <td>${i[5]}</td>
+                        <td>${i[6]}</td>
+                        <td>${i[7]}</td>
+                        <td>${i[8]}</td>
+                        <td>${i[0]}</td>
+                        <td>${i[1]}</td>
+                        <td>${i[9]}</td>
+                        <td>
+                          <div class="d-flex align-items-center gap-2">
+                            <a href="admindeleteinquiry?id=${i[2]}" class="btn btn-sm btn-danger">Delete</a>
+                            <form action="admintoggleInquiryStatus" method="post" class="m-0">
+                              <input type="hidden" name="id" value="${i[2]}">
+                              <button type="submit" class="btn btn-sm btn-${i[9] == 'ON' ? 'warning' : 'success'}">
+                                ${i[9] == 'ON' ? 'Disable' : 'Enable'}
+                              </button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
                     </c:forEach>
-                </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-end">
-                      <li class="page-item"><a class="page-link" href="#">«</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </main>
-                </div>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
                 
        
             
@@ -150,7 +157,29 @@
 
 
 
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- jQuery (first!) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Your DataTable init -->
+<script>
+  $(document).ready(function () {
+    $('#listInquiryTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true
+    });
+  });
+</script>
 
     
     <!--begin::Third Party Plugin(OverlayScrollbars)-->

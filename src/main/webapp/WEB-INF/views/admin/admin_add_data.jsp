@@ -60,133 +60,118 @@
 <body  class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
 <div class="app-wrapper">
-      <!--begin::Header-->
-	<%@ include file="admin_header.jsp" %>
-      <!--end::Header-->
-      <!--begin::Sidebar-->
-      <%@ include file="admin_sidebar.jsp" %>
-      <!--end::Sidebar-->
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              
-              
-              
-              
-              
-              
-              
-              
-              
-        <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
-					<form action="adminsaveinsurance" method="post">
-					 <a href="adminaddlocation">Add New Location</a>
-					 </form>
-                  <div class="card-body">
-                    <table id="listlocationTable" class="table table-bordered">
-                      <thead>
-                     <tr>
-                     	
-                        <th>State</th>
-                    	<th>City</th>
-                    	<th>Area</th>
-                    	
+  <%@ include file="admin_header.jsp" %>
+  <%@ include file="admin_sidebar.jsp" %>
+
+  <main class="app-main">
+    <div class="app-content-header">
+      <div class="container-fluid">
+        <div class="row">
+
+          <!-- LOCATION CARD -->
+          <div class="col-md-4">
+            <div class="card my-4">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Location List</h5>
+                <div>
+                  <button class="btn btn-outline-primary btn-sm" onclick="downloadCSV('pending-vehicles.csv')">
+                    <i class="fas fa-download me-1"></i> CSV
+                  </button>
+                  <a href="adminaddlocation" class="btn btn-primary btn-sm ms-1">Add</a>
+                </div>
+              </div>
+              <div class="card-body table-responsive p-0" style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-bordered mb-0">
+                  <thead>
+                    <tr><th>State</th>
+                    <th>City</th>
+                    <th>Area</th></tr>
+                  </thead>
+                  <tbody>
+                    <c:forEach var="area" items="${allArea}">
+                      <c:if test="${not empty area.cityName and not empty area.stateName}">
+                        <tr>
+                          <td>${area.stateName}</td>
+                          <td>${area.cityName}</td>
+                          <td>${area.areaName}</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        <c:forEach var="area" items="${allArea}">
-                        <c:if test="${not empty area.cityName and not empty area.stateName}">
-                    <tr>
-                    	
-                        <td>${area.stateName}</td>
-                        <td>${area.cityName}</td>
-                        <td>${area.areaName}</td>
-                       
-                        
-                    </tr>
-                    </c:if>
-                </c:forEach>
-                      </tbody>
-                    </table>
-                  </div>    
-                  <br>
-				              
-                     
-              
+                      </c:if>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
+          <!-- INSURANCE CARD -->
+          <div class="col-md-4">
+            <div class="card my-4">
+              <div class="card-header"><h5 class="mb-0">Add Insurance</h5></div>
+              <div class="card-body">
+                <form action="adminsaveinsurance" method="post" class="row g-2 align-items-center mb-3">
+                  <div class="col-8">
+                    <input type="text" name="insuranceType" class="form-control" placeholder="Insurance type" required />
+                  </div>
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-success w-100">Add</button>
+                  </div>
+                </form>
+                <table class="table table-bordered table-sm">
+                  <thead><tr><th>ID</th><th>Type</th><th>Action</th></tr></thead>
+                  <tbody>
+                    <c:forEach var="ins" items="${allInsurance}">
+                      <tr>
+                        <td>${ins.insuranceId}</td>
+                        <td>${ins.insuranceType}</td>
+                        <td>
+                          <a href="admindeleteinsurance?id=${ins.insuranceId}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this insurance?')">Delete</a>
+                        </td>
+                      </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
+          <!-- FEATURES CARD -->
+          <div class="col-md-4">
+            <div class="card my-4">
+              <div class="card-header"><h5 class="mb-0">Add Feature</h5></div>
+              <div class="card-body">
+                <form action="adminsavefeatures" method="post" class="row g-2 align-items-center mb-3">
+                  <div class="col-8">
+                    <input type="text" name="featureName" class="form-control" placeholder="Feature name" required />
+                  </div>
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-success w-100">Add</button>
+                  </div>
+                </form>
+                <h6>All Features</h6>
+                <table class="table table-bordered table-sm">
+                  <thead><tr><th>ID</th><th>Name</th><th>Action</th></tr></thead>
+                  <tbody>
+                    <c:forEach var="feat" items="${allFeatures}">
+                      <tr>
+                        <td>${feat.featureId}</td>
+                        <td>${feat.featureName}</td>
+                        <td>
+                          <a href="admindeletefeature?id=${feat.featureId}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this feature?')">Delete</a>
+                        </td>
+                      </tr>
+                    </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-<div>
-
-            <!-- Add Insurance Inline -->
-<h3>Add New Insurance</h3>
-<form action="adminsaveinsurance" method="post">
-    <input type="text" name="insuranceType" placeholder="Enter insurance type" required />
-    <input type="submit" value="Add Insurance" />
-</form>
-
-
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>Insurance Type</th>
-        <th>Action</th>
-    </tr>
-    <c:forEach var="ins" items="${allInsurance}">
-        <tr>
-            <td>${ins.insuranceId}</td>
-            <td>${ins.insuranceType}</td>
-            <td>
-                <a href="admindeleteinsurance?id=${ins.insuranceId}" onclick="return confirm('Delete this insurance?')">Delete</a>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-
-<br>
-
-		<!-- Add Features Inline -->
-		<h3>Add New Feature</h3>
-		<form action="adminsavefeatures" method="post">
-		    <input type="text" name="featureName" placeholder="Enter feature name" required />
-		    <input type="submit" value="Add Feature" />
-		</form>
-		
-		<!-- Feature List -->
-		<h4>All Vehicle Features</h4>
-		<table class="table table-bordered">
-		    <tr>
-		        <th>ID</th>
-		        <th>Feature Name</th>
-		        <th>Action</th>
-		    </tr>
-		    <c:forEach var="feat" items="${allFeatures}">
-		        <tr>
-		            <td>${feat.featureId}</td>
-		            <td>${feat.featureName}</td>
-		            <td>
-		                <a href="admindeletefeature?id=${feat.featureId}" onclick="return confirm('Delete this feature?')">Delete</a>
-		            </td>
-		        </tr>
-		    </c:forEach>
-		</table>
-
-        </td>
-    </tr>
-</table>
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </div>
+  </main>
 </div>
-</div>
-</div>
-</main>
-</div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

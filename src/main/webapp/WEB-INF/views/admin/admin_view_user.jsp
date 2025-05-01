@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,88 +72,84 @@
 
   <!--begin::App Main-->
   <main class="app-main">
-    <div class="container-fluid py-4">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="mb-0">Edit ${user.firstName} ${user.lastName}</h4>
-        </div>
+  <div class="container-fluid py-4">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="mb-0">Profile: ${user.firstName} ${user.lastName}</h4>
+      </div>
 
-        <div class="card-body">
-          <form action="adminupdateuser" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="userId" value="${user.userId}">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label"><strong>First Name:</strong></label>
+            <div class="form-control-plaintext">${user.firstName}</div>
+          </div>
 
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">First Name:</label>
-                <input type="text" name="firstName" class="form-control" value="${user.firstName}" required>
-              </div>
+          <div class="col-md-6">
+            <label class="form-label"><strong>Last Name:</strong></label>
+            <div class="form-control-plaintext">${user.lastName}</div>
+          </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Last Name:</label>
-                <input type="text" name="lastName" class="form-control" value="${user.lastName}" required>
-              </div>
+          <div class="col-md-6">
+            <label class="form-label"><strong>Email:</strong></label>
+            <div class="form-control-plaintext">${user.email}</div>
+          </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Email:</label>
-                <input type="email" name="email" class="form-control" value="${user.email}" required>
-              </div>
-
-              <div class="col-md-6">
-				    <label class="form-label">Profile Picture:</label>
-				    <input type="file" name="profilePic" class="form-control">
-				    <c:if test="${not empty user.profilePicPath}">
-				        <div class="mt-2">
-				            <img src="${user.profilePicPath}" alt="Profile Picture" style="width: 100px; height: auto;">
-				        </div>
-				    </c:if>
-				</div>
-
-
-              <div class="col-md-6">
-                <label class="form-label">Contact Number:</label>
-                <input type="number" name="contactNum" class="form-control" value="${user.contactNum}" required>
-              </div>
-
-
-
-              <div class="col-md-6">
-                <label class="form-label">Born Year:</label>
-                <input type="number" name="bornYear" class="form-control" value="${user.bornYear}" required>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label d-block">Gender:</label>
-                <div class="form-check form-check-inline">
-                  <input type="radio" id="male" name="gender" value="male" class="form-check-input"
-                         ${user.gender == 'male' ? 'checked' : ''} required>
-                  <label for="male" class="form-check-label">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input type="radio" id="female" name="gender" value="female" class="form-check-input"
-                         ${user.gender == 'female' ? 'checked' : ''} required>
-                  <label for="female" class="form-check-label">Female</label>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Role:</label>
-                <select name="role" class="form-select" required>
-                  <option value="BUYER" ${user.role == 'BUYER' ? 'selected' : ''}>Buyer</option>
-                  <option value="SELLER" ${user.role == 'SELLER' ? 'selected' : ''}>Seller</option>
-                  <option value="SELLER" ${user.role == 'ADMIN' ? 'selected' : ''}>Admin</option>
-                </select>
-              </div>
-
-              <div class="col-12">
-                <button type="submit" class="btn btn-success">Update User</button>
-              </div>
+          <div class="col-md-6">
+            <label class="form-label"><strong>Profile Picture:</strong></label>
+            <div>
+              <c:if test="${not empty user.profilePicPath}">
+                <img src="${user.profilePicPath}" alt="Profile Picture" style="width: 100px; height: auto;" />
+              </c:if>
+              <c:if test="${empty user.profilePicPath}">
+                <p class="text-muted">No Profile Picture</p>
+              </c:if>
             </div>
-          </form>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"><strong>Contact Number:</strong></label>
+            <div class="form-control-plaintext">${user.contactNum}</div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"><strong>Born Year:</strong></label>
+            <div class="form-control-plaintext">${user.bornYear}</div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"><strong>Gender:</strong></label>
+            <div class="form-control-plaintext text-capitalize">${user.gender}</div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"><strong>Role:</strong></label>
+            <div class="form-control-plaintext text-uppercase">${user.role}</div>
+          </div>
+        <div class="col-md-6">
+		  <label class="form-label"><strong>Created At</strong></label>
+		  <div class="form-control-plaintext">
+		   ${user.createdAt}
+		  </div>
+		</div>
+
+		
+        <div class="mt-4">
+          <a href="adminlistuser" class="btn btn-primary">← Back to User List</a>
         </div>
+        
+        <div class="mt-4">
+         <a href="adminedituser?id=${user.userId}" class="btn btn-sm btn-primary me-1">Edit</a>
+        </div>
+        
+</div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
+
 </div>
+
 
 
 

@@ -58,7 +58,7 @@
           </a>
         </li>
          <li class="nav-item">
-          <a href="profile" class="nav-link ">
+          <a href="adminviewuser?id=${sessionScope.user.userId}" class="nav-link ">
            
             <p> Profile</p>
           </a>

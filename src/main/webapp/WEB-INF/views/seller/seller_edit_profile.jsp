@@ -61,11 +61,11 @@
 
 <div class="app-wrapper">
   <!--begin::Header-->
-  <%@ include file="admin_header.jsp" %>
+  <%@ include file="header.jsp" %>
   <!--end::Header-->
 
   <!--begin::Sidebar-->
-  <%@ include file="admin_sidebar.jsp" %>
+  <%@ include file="sidebar.jsp" %>
   <!--end::Sidebar-->
 
   <!--begin::App Main-->
@@ -77,7 +77,7 @@
         </div>
 
         <div class="card-body">
-          <form action="adminupdateuser" method="post" enctype="multipart/form-data">
+          <form action="sellerupdateprofile" method="post" enctype="multipart/form-data">
             <input type="hidden" name="userId" value="${user.userId}">
 
             <div class="row g-3">
@@ -138,7 +138,6 @@
                 <select name="role" class="form-select" required>
                   <option value="BUYER" ${user.role == 'BUYER' ? 'selected' : ''}>Buyer</option>
                   <option value="SELLER" ${user.role == 'SELLER' ? 'selected' : ''}>Seller</option>
-                  <option value="SELLER" ${user.role == 'ADMIN' ? 'selected' : ''}>Admin</option>
                 </select>
               </div>
 

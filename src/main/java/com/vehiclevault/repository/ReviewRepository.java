@@ -8,4 +8,7 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Integer> {
     List<ReviewEntity> findByVehicle_VehicleId(Integer vehicleId);
     List<ReviewEntity> findByUser_UserId(Integer userId);
+    
+    
+    
 }

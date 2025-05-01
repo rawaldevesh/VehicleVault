@@ -20,6 +20,8 @@
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
+   
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -59,34 +61,44 @@
     
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-	<%@ include file="buyer_header.jsp" %>
-      <!--end::Header-->
-      <!--begin::Sidebar-->
-      <%@ include file="buyer_sidebar.jsp" %>
-      <!--end::Sidebar-->
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <div class="row">
-             
-<div class="card-body table-responsive p-0">
-<table class="table table-bordered">
-    <tr>
-        <!-- Sidebar -->
-       
 
-        <!-- Main Content -->
-        <td width="80%" valign="top">
-            <h2>My Inquiries</h2>
+  <!--begin::App Wrapper-->
+  <div class="app-wrapper">
 
-            <table class="table table-bordered">
-                <tr>
+    <!--begin::Header-->
+    <%@ include file="buyer_header.jsp" %>
+    <!--end::Header-->
+
+    <!--begin::Sidebar-->
+    <%@ include file="buyer_sidebar.jsp" %>
+    <!--end::Sidebar-->
+
+    <!--begin::App Main-->
+    <main class="app-main">
+
+      <!--begin::App Content Header-->
+      <div class="app-content-header">
+        <div class="container-fluid">
+
+          <div class="row mb-3">
+            <div class="col-sm-6">
+              <h3 class="mb-0">My Inquiry List</h3>
+            </div>
+          </div>
+
+          <!--begin::Table Card-->
+          <div class="card">
+            <div class="card-body table-responsive p-3">
+
+              <!-- Download CSV Button -->
+              <button class="btn btn-outline-primary mb-3" onclick="downloadCSV('My_Inquiries.csv')">
+                <i class="fas fa-download me-1"></i> Download CSV
+              </button>
+
+              <!-- Inquiry Table -->
+              <table id="listInquiryTable" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Contact Number</th>
@@ -95,32 +107,139 @@
                     <th>Inquiry Message</th>
                     <th>Inquiry Date</th>
                     <th>Status</th>
-                </tr>
-
-                <c:forEach var="i" items="${listInquiry}">
+                  </tr>
+                </thead>
+                <tbody>
+                  <c:forEach var="i" items="${listInquiry}">
                     <c:if test="${i[3] == sessionScope.user.userId}">
-                        <tr>
-                            <td>${i[4]}</td>
-                            <td>${i[5]}</td>
-                            <td>${i[6]}</td>
-                            <td>${i[7]}</td>
-                            <td>${i[8]}</td>
-                            <td>${i[0]}</td>
-                            <td>${i[1]}</td>
-                            <td>${i[9]}</td>
-                        </tr>
+                      <tr>
+                        <td>${i[4]}</td>
+                        <td>${i[5]}</td>
+                        <td>${i[6]}</td>
+                        <td>${i[7]}</td>
+                        <td>${i[8]}</td>
+                        <td>${i[0]}</td>
+                        <td>${i[1]}</td>
+                        <td>${i[9]}</td>
+                      </tr>
                     </c:if>
-                </c:forEach>
-            </table>
-        </td>
-    </tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
+                  </c:forEach>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+          <!--end::Table Card-->
+
+        </div>
+      </div>
+      <!--end::App Content Header-->
+
+    </main>
+    <!--end::App Main-->
+
+  </div>
+  <!--end::App Wrapper-->
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- DataTables Core -->
+  <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+  <!-- DataTables Bootstrap 5 Integration -->
+  <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+  <!-- DataTable Initialization -->
+  <script>
+    $(document).ready(function () {
+      $('#listInquiryTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        lengthChange: true,
+        autoWidth: false,
+        responsive: true
+      });
+    });
+
+    
+  </script>
+
+</body>
+
+
+    
+    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
+      integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
+      crossorigin="anonymous"
+    ></script>
+    <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <script src="../../dist/js/adminlte.js"></script>
+   <script>
+    function downloadCSV(filename) {
+        const table = document.getElementById("listInquiryTable");
+        if (!table) return;
+
+        let csv = [];
+        const rows = table.querySelectorAll("thead tr, tbody tr");
+
+        rows.forEach((row) => {
+            const cols = row.querySelectorAll("th, td");
+            const rowData = [];
+
+            cols.forEach((cell, index) => {
+                // Skip the last column (Actions)
+                if (index === cols.length - 1) return;
+
+                let text = cell.textContent || cell.innerText;
+                text = text.replace(/₹/g, '').trim(); // Remove ₹ symbol
+                rowData.push('"' + text.replace(/"/g, '""') + '"');
+            });
+
+            // Only add non-empty rows
+            if (rowData.length > 0) {
+                csv.push(rowData.join(","));
+            }
+        });
+
+        // Check if there's data
+        if (csv.length === 0) {
+            alert("No data to export.");
+            return;
+        }
+
+        const csvContent = csv.join("\n");
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", filename);
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    
+    
+    
+</script>
 
 </body>
 </html>

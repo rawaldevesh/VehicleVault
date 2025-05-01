@@ -31,12 +31,18 @@ public class VehicleEntity {
     private LocalDate listingDate;
     private String registrationNum;
     private	Integer userId;
+    @Column(name = "city_id")
     private	Integer cityId;
+    @Column(name = "area_id")
     private	Integer areaId;
+    @Column(name = "state_id")
     private	Integer stateId;
     private	Date registrationYear;
-    private	String insurance;
-    private String features;
+    
+//    @Column(name = "insurance_id")
+//    private Integer insuranceId;  // Foreign key column storing insuranceId
+  
+    private List<Integer> featureIds;
     private	String seats;
     private	String kmsDriven;
     private	String rTO;
@@ -46,16 +52,33 @@ public class VehicleEntity {
     private String carPicPath;
     private String vehicleStatus = "PENDING"; // default when seller adds
     
-    
-    @ManyToMany
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "state_id", insertable = false, updatable = false)
+    private StateEntity state;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id", insertable = false, updatable = false)
+    private CityEntity city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area_id", insertable = false, updatable = false)
+    private AreaEntity area;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "insurance_id", referencedColumnName = "insuranceId")
+    private InsuranceEntity insurance;  // Full InsuranceEntity object
+
+ // Correct the ManyToMany relationship here (list of features)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "vehicle_features",
-        joinColumns = @JoinColumn(name = "vehicle_id"),
+        name = "vehicle_features", 
+        joinColumns = @JoinColumn(name = "vehicle_id"), 
         inverseJoinColumns = @JoinColumn(name = "feature_id")
     )
-    private List<FeaturesEntity> featuresEntities = new ArrayList<>();
+    private List<FeaturesEntity> featuresEntities = new ArrayList<>(); // Use List to store multiple features
 
-    
+    // Getters and setters
+
     public List<FeaturesEntity> getFeaturesEntities() {
         return featuresEntities;
     }
@@ -63,10 +86,15 @@ public class VehicleEntity {
     public void setFeaturesEntities(List<FeaturesEntity> featuresEntities) {
         this.featuresEntities = featuresEntities;
     }
+    
+    
+	public InsuranceEntity getInsurance() {
+		return insurance;
+	}
+	public void setInsurance(InsuranceEntity insurance) {
+	    this.insurance = insurance;
+	}
 
-    
-    
-    
 	public Integer getVehicleId() {
 		return vehicleId;
 	}
@@ -190,12 +218,12 @@ public class VehicleEntity {
 	public void setRegistrationYear(Date registrationYear) {
 		this.registrationYear = registrationYear;
 	}
-	public String getInsurance() {
-		return insurance;
-	}
-	public void setInsurance(String insurance) {
-		this.insurance = insurance;
-	}
+//	public Integer getInsurance() {
+//		return insuranceId;
+//	}
+//	public void setInsurance(Integer insuranceId) {
+//		this.insuranceId = insuranceId;
+//	}
 	public String getSeats() {
 		return seats;
 	}
@@ -232,15 +260,29 @@ public class VehicleEntity {
 	public void setNumberofBags(String numberofBags) {
 		this.numberofBags = numberofBags;
 	}
-	public String getFeatures() {
-		return features;
-	}
-	public void setFeatures(String features) {
-		this.features = features;
-	}
+//	
+	
 	public String getCarPicPath() {
 		return carPicPath;
 	}
+//	public Integer getInsuranceId() {
+//		return insuranceId;
+//	}
+//
+//	public void setInsuranceId(Integer insuranceId) {
+//		this.insuranceId = insuranceId;
+//	}
+
+	public List<Integer> getFeatureIds() {
+		return featureIds;
+	}
+
+	public void setFeatureIds(List<Integer> featureIds) {
+		this.featureIds = featureIds;
+	}
+
+
+
 	public void setCarPicPath(String carPicPath) {
 		this.carPicPath = carPicPath;
 	}
@@ -249,6 +291,30 @@ public class VehicleEntity {
 	}
 	public void setVehicleStatus(String vehicleStatus) {
 		this.vehicleStatus = vehicleStatus;
+	}
+
+	public StateEntity getState() {
+		return state;
+	}
+
+	public void setState(StateEntity state) {
+		this.state = state;
+	}
+
+	public CityEntity getCity() {
+		return city;
+	}
+
+	public void setCity(CityEntity city) {
+		this.city = city;
+	}
+
+	public AreaEntity getArea() {
+		return area;
+	}
+
+	public void setArea(AreaEntity area) {
+		this.area = area;
 	}
 	
 	

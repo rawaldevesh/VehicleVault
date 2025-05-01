@@ -48,13 +48,19 @@ public class AdminLocationController {
     public String saveArea(AreaEntity area) {
         StateEntity state = repositoryState.findById(area.getStateId()).orElse(null);
         CityEntity city = repositoryCity.findById(area.getCityId()).orElse(null);
+
         if (state != null && city != null) {
+            area.setCityId(city.getCityId());
+            area.setStateId(state.getStateId());
             area.setCityName(city.getCityName());
-            area.setStateName(city.getStateName());
+            area.setStateName(state.getStateName()); // previously using city.getStateName()
         }
+
         repositoryArea.save(area);
         return "redirect:/adminaddlocation";
     }
+
+    
     @GetMapping("admindeletelocation")
     public String deleteLocation(@RequestParam("id") Integer areaId) {
         repositoryArea.deleteById(areaId);

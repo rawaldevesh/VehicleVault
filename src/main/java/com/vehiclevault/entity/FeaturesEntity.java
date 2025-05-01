@@ -15,8 +15,7 @@ public class FeaturesEntity {
    
     private String featureName;
     
-    @ManyToMany(mappedBy = "featuresEntities")
-    private List<VehicleEntity> vehicles;
+   
 
     
 	public Integer getFeatureId() {

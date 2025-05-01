@@ -23,6 +23,7 @@
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -63,73 +64,87 @@
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
     <div class="app-wrapper">
-      <!--begin::Header-->
-	<%@ include file="admin_header.jsp" %>
-      <!--end::Header-->
-      <!--begin::Sidebar-->
-      <%@ include file="admin_sidebar.jsp" %>
-      <!--end::Sidebar-->
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Inquiry List</h3></div>
-              
-            <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
-                  <div class="card-body">
-                    <table id="listUserTable" class="table table-bordered">
-                      <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Contact Number</th>
-                        <th>City</th>
-                        <th>Born Year</th>
-                        <th>Gender</th>
-                        <th>Created At</th>
-                        <th>Action</th>
-                    </tr>
+  <!--begin::Header-->
+  <%@ include file="admin_header.jsp" %>
+  <!--end::Header-->
+
+  <!--begin::Sidebar-->
+  <%@ include file="admin_sidebar.jsp" %>
+  <!--end::Sidebar-->
+
+  <!--begin::App Main-->
+  <main class="app-main">
+  <div class="container-fluid py-4">
+    <div class="row" style="min-height: 800px;">
+      <div class="col-12">
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="mb-0">User List</h3>
+        </div>
+
+        <!-- Card -->
+        <div class="card shadow-sm">
+          <div class="card-body">
+
+            <!-- Download Button -->
+            <div class="mb-3">
+              <button class="btn btn-outline-primary" onclick="downloadCSV('pending-vehicles.csv')">
+                <i class="fas fa-download me-1"></i> Download CSV
+              </button>
+            </div>
+
+            <!-- User Table -->
+            <div class="table-responsive">
+              <table id="listUserTable" class="table table-bordered table-hover align-middle w-100">
+                <thead class="table-light">
+                  <tr class="text-center">
+                    <th>User ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Born Year</th>
+                    <th>Gender</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                  </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${listUser}" var="u">
-                        <tr>
-                            <td>${u.firstName}</td>
-                            <td>${u.lastName}</td>
-                            <td>${u.email}</td>
-                            <td>${u.contactNum}</td>
-                            <td>${u.city}</td>
-                            <td>${u.bornYear}</td>
-                            <td>${u.gender}</td>
-                            <td>${u.createdAt}</td>
-                            <td>
-                                <a href="adminedituser?id=${u.userId}">Edit</a> |
-                                <a href="admindeleteUser?id=${u.userId}" onclick="return confirm('Are you sure?')">Delete</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                  <c:forEach items="${listUser}" var="u">
+                    <tr>
+                      <td class="text-center">${u.userId}</td>
+                      <td>${u.firstName}</td>
+                      <td>${u.lastName}</td>
+                      <td>${u.email}</td>
+                      <td>${u.contactNum}</td>
+                      <td class="text-center">${u.bornYear}</td>
+                      <td class="text-capitalize text-center">${u.gender}</td>
+                      <td>${u.createdAt}</td>
+                      <td class="text-center">
+                       <div class="d-flex justify-content-center gap-1 text-nowrap" style="min-width: 180px;">
+						  <a href="adminviewuser?id=${u.userId}" class="btn btn-sm btn-info px-2">View</a>
+						  <a href="adminedituser?id=${u.userId}" class="btn btn-sm btn-primary px-2">Edit</a>
+						  <a href="admindeleteUser?id=${u.userId}" class="btn btn-sm btn-danger px-2" onclick="return confirm('Are you sure?')">Delete</a>
+						</div>
+                      </td>
+                    </tr>
+                  </c:forEach>
                 </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-end">
-                      <li class="page-item"><a class="page-link" href="#">«</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-       
+              </table>
+            </div> <!-- table-responsive -->
+
+          </div> <!-- card-body -->
+        </div> <!-- card -->
+
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- container -->
+</main>
+
+</div>
+
+      
             
           
                     
@@ -137,7 +152,29 @@
 
 
 
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <!-- jQuery (first!) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Your DataTable init -->
+<script>
+  $(document).ready(function () {
+    $('#listUserTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true
+    });
+  });
+</script>
 
     
     <!--begin::Third Party Plugin(OverlayScrollbars)-->

@@ -72,38 +72,78 @@
         </style>
   </head>
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-	<%@ include file="buyer_header.jsp" %>
-      <!--end::Header-->
-      <!--begin::Sidebar-->
-      <%@ include file="buyer_sidebar.jsp" %>
-        <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
-              
+
+  <!--begin::App Wrapper-->
+  <div class="app-wrapper">
+
+    <!--begin::Header-->
+    <%@ include file="buyer_header.jsp" %>
+    <!--end::Header-->
+
+    <!--begin::Sidebar-->
+    <%@ include file="buyer_sidebar.jsp" %>
+    <!--end::Sidebar-->
+
+    <!--begin::App Main-->
+    <main class="app-main">
+
+      <!--begin::App Content Header-->
+      <div class="app-content-header">
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="row mb-4">
+            <div class="col-sm-6">
+              <h3 class="mb-0">Dashboard</h3>
             </div>
-            <!--end::Row-->
           </div>
-          <div class="alert alert-info mt-3" role="alert">
-  <h5 class="alert-heading">Welcome to Vehicle Vault!</h5>
-  <p>🚗 Browse listed vehicles and send inquiries to sellers.</p>
-  <p>📩 Track your inquiry status below or on the 'My Inquiries' page.</p>
-  <hr>
-  <a href="buyersearchvehicle" class="btn btn-primary btn-sm">Start Browsing</a>
-</div>
+
+          <!-- Welcome Alert -->
+          <div class="alert alert-info d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center" role="alert">
+            <div>
+              <h5 class="alert-heading">👋 Welcome to Vehicle Vault!</h5>
+              <p class="mb-1">🚗 Browse listed vehicles and send inquiries to sellers.</p>
+              <p class="mb-2">📩 Track your inquiry status here or visit the <a href="buyershowinquiries">My Inquiries</a> page.</p>
+            </div>
+            <div>
+              <a href="buyersearchvehicle" class="btn btn-primary btn-sm mt-2 mt-sm-0">Start Browsing</a>
+            </div>
+          </div>
+
+          <!-- Static Dashboard Stats -->
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              <div class="card shadow-sm border-primary">
+                <div class="card-body text-center">
+                  <h6 class="card-title text-muted">Vehicles Available</h6>
+                  <h3 class="text-primary">${totalVehicles}</h3>
+                </div>
+              </div>
+            </div>
 
 
+          </div>
 
- </div>
- </main>
- </div>
+          <!-- Optional Tip Box -->
+          <div class="card mt-4 border-0 bg-light">
+            <div class="card-body">
+              <h6 class="mb-2"><i class="fas fa-lightbulb me-2 text-warning"></i>Quick Tip</h6>
+              <p class="mb-0">You can filter vehicles by make, model, year, fuel type, and price using the advanced search options.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+    <!--end::App Main-->
+
+  </div>
+  <!--end::App Wrapper-->
+
+</body>
+
  
              
                

@@ -23,6 +23,7 @@
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -62,90 +63,100 @@
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-      <!--begin::Header-->
-	<%@ include file="header.jsp" %>
-      <!--end::Header-->
-      <!--begin::Sidebar-->
-      <%@ include file="sidebar.jsp" %>
-      <!--end::Sidebar-->
-      <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Inquiry List</h3></div>
-              
-            <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
-                  <div class="card-body">
-                    <table id="listInquiryTable" class="table table-bordered">
-                      <thead>
+<div class="app-wrapper">
+
+  <!--begin::Header-->
+  <%@ include file="header.jsp" %>
+  <!--end::Header-->
+
+  <!--begin::Sidebar-->
+  <%@ include file="sidebar.jsp" %>
+  <!--end::Sidebar-->
+
+  <!--begin::App Main-->
+  <main class="app-main">
+    
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="col-sm-6">
+            <h3 class="mb-0">Inquiry List</h3>
+          </div>
+        </div>
+
+        <!--begin::Table Card-->
+        <div class="card">
+          <div class="card-body table-responsive p-3">
+
+            <button class="btn btn-outline-primary mb-3" onclick="downloadCSV('Inquiry-list.csv')">
+              <i class="fas fa-download me-1"></i> Download CSV
+            </button>
+
+            <table id="listInquiryTable" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Inquiry ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Contact Number</th>
+                  <th>Email</th>
+                  <th>Vehicle Model</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <c:forEach var="i" items="${listInquiry}">
+                  <c:if test="${i[10] == sessionScope.user.userId}">
                     <tr>
-                        <th>Inquiry ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Contact Number</th>
-                        <th>Email</th>
-                        <th>Vehicle Model</th>
-                        <th>Message</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                      <td>${i[2]}</td>
+                      <td>${i[4]}</td>
+                      <td>${i[5]}</td>
+                      <td>${i[6]}</td>
+                      <td>${i[7]}</td>
+                      <td>${i[8]}</td>
+                      <td>${i[0]}</td>
+                      <td>${i[1]}</td>
+                      <td>${i[9]}</td>
+                      <td class="text-center">
+  <div class="d-flex justify-content-center gap-2">
+    <a href="sellerdeleteinquiry?id=${i[2]}" class="btn btn-sm btn-danger">Delete</a>
+    
+    <form action="sellertoggleInquiryStatus" method="post" class="d-inline">
+      <input type="hidden" name="id" value="${i[2]}">
+      <button type="submit" class="btn btn-sm btn-secondary">
+        ${i[9] == 'ON' ? 'Disable' : 'Enable'}
+      </button>
+    </form>
+  </div>
+</td>
+
                     </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="i" items="${listInquiry}">
-                    <c:if test="${i[10] == sessionScope.user.userId}">
-                        <tr>
-                            <td>${i[3]}</td>
-                            <td>${i[4]}</td>
-                            <td>${i[5]}</td>
-                            <td>${i[6]}</td>
-                            <td>${i[7]}</td>
-                            <td>${i[8]}</td>
-                            <td>${i[0]}</td>
-                            <td>${i[1]}</td>
-                            <td>${i[9]}</td>
-                             
-                            <td>
-                                <a href="admindeleteinquiry?id=${i[2]}">Delete</a> |
-                                <form action="admintoggleInquiryStatus" method="post" style="display:inline;">
-                                    <input type="hidden" name="id" value="${i[2]}">
-                                    <button type="submit">
-                                        ${i[9] == 'ON' ? 'Disable' : 'Enable'}
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        </c:if>
-                    </c:forEach>
-                </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-end">
-                      <li class="page-item"><a class="page-link" href="#">«</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
-                  </div>
-                </div>
-                </div>
-                </div>
-                </div>
-                </main>
-                </div>
-                
-       
+                  </c:if>
+                </c:forEach>
+              </tbody>
+            </table>
+
+            <!-- Pagination -->
+            
+
+          </div>
+        </div>
+        <!--end::Table Card-->
+
+      </div>
+    </div>
+    <!--end::App Content Header-->
+
+  </main>
+  <!--end::App Main-->
+
+</div>
+<!--end::App Wrapper-->
+
             
           
                     
@@ -153,7 +164,29 @@
 
 
 
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- jQuery (first!) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Your DataTable init -->
+<script>
+  $(document).ready(function () {
+    $('#listInquiryTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true
+    });
+  });
+</script>
 
     
     <!--begin::Third Party Plugin(OverlayScrollbars)-->

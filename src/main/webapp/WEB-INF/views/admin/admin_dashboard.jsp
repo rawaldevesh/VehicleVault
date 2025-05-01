@@ -22,6 +22,8 @@
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
+    
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -94,122 +96,158 @@
             <!--end::Row-->
           </div>
           <!--end::Container-->
-        <div class="row">
-              <!--begin::Col-->
-              <div class="col-lg-3 col-6">
-                <!--begin::Small Box Widget 1-->
-                <div class="small-box text-bg-primary">
-                  <div class="inner">
-                    <h3>${totalVehicles}</h3>
-                    <p>Total Vehicles</p>
-                  </div>
-                  <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
-                  </svg>
-                  <a href="adminlistvehicle" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-                    List Vehicles <i class="bi bi-link-45deg"></i>
-                  </a>
-                </div>
-                <!--end::Small Box Widget 1-->
-              </div>
-              <!--end::Col-->
-              
-              <!--end::Col-->
-              <div class="col-lg-3 col-6">
-                <!--begin::Small Box Widget 3-->
-                <div class="small-box text-bg-warning">
-                  <div class="inner">
-                    <h3>${totalUsers}</h3>
-                    <p>User Registrations</p>
-                  </div>
-                  <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
-                  </svg>
-                  <a href="#" class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
-                    List Users <i class="bi bi-link-45deg"></i>
-                  </a>
-                </div>
-                <!--end::Small Box Widget 3-->
-              </div>
-              <!--end::Col-->
-              <div class="col-lg-3 col-6">
-                <!--begin::Small Box Widget 4-->
-                <div class="small-box text-bg-danger">
-                  <div class="inner">
-                    <h3>${totalInquiries}</h3>
-                    <p>Vehicle Inquiries</p>
-                  </div>
-                  <svg class="small-box-icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path clip-rule="evenodd" fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 018.25-8.25.75.75 0 01.75.75v6.75H18a.75.75 0 01.75.75 8.25 8.25 0 01-16.5 0z"></path>
-                    <path clip-rule="evenodd" fill-rule="evenodd" d="M12.75 3a.75.75 0 01.75-.75 8.25 8.25 0 018.25 8.25.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75V3z"></path>
-                  </svg>
-                  <a href="#" class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover">
-                    List Inquiries <i class="bi bi-link-45deg"></i>
-                  </a>
-                </div>
-                <!--end::Small Box Widget 4-->
-              </div>
-              <!--end::Col-->
-            </div>
+        <!--begin::Dashboard Cards-->
+<div class="row g-4 mb-4">
+
+  <!-- Total Buyers -->
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-primary border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title text-muted">Total Buyers</h5>
+            <h3 class="fw-bold mb-0">${totalBuyers}</h3>
+          </div>
+          <i class="bi bi-people-fill fs-1 text-primary"></i>
         </div>
+        <a href="adminlistuser" class="stretched-link text-decoration-none text-primary small d-block mt-2">
+          View Buyers <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- This Month's Buyers -->
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-success border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title text-muted">Buyers (This Month)</h5>
+            <h3 class="fw-bold mb-0">${thisMonthBuyerCount}</h3>
+          </div>
+          <i class="bi bi-calendar-event-fill fs-1 text-success"></i>
+        </div>
+        <a href="adminlistuser" class="stretched-link text-decoration-none text-success small d-block mt-2">
+          View Recent Buyers <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Vehicles -->
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-info border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title text-muted">Total Vehicles</h5>
+            <h3 class="fw-bold mb-0">${totalVehicles}</h3>
+          </div>
+          <i class="bi bi-truck-front-fill fs-1 text-info"></i>
+        </div>
+        <a href="adminlistvehicle" class="stretched-link text-decoration-none text-info small d-block mt-2">
+          View Vehicles <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- This Month's Vehicles -->
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-warning border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title text-muted">Vehicles (This Month)</h5>
+            <h3 class="fw-bold mb-0">${thisMonthVehicleCount}</h3>
+          </div>
+          <i class="bi bi-calendar-check-fill fs-1 text-warning"></i>
+        </div>
+        <a href="adminlistvehicle" class="stretched-link text-decoration-none text-warning small d-block mt-2">
+          View Recent Vehicles <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Vehicles -->
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-secondary border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+          
+            <h5 class="card-title text-muted">Approved Vehicles</h5>
+            <h3 class="fw-bold mb-0">${totalApprovedVehicles}</h3>
+          </div>
+          <i class="bi bi-hourglass-split fs-1 text-secondary"></i>
+        </div>
+        <a href="adminlistvehicle" class="stretched-link text-decoration-none text-secondary small d-block mt-2">
+          View Vehicle List <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Total Inquiries -->
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-danger border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title text-muted">Vehicle Inquiries</h5>
+            <h3 class="fw-bold mb-0">${totalInquiry}</h3>
+          </div>
+          <i class="bi bi-chat-dots-fill fs-1 text-danger"></i>
+        </div>
+        <a href="adminlistinquiry" class="stretched-link text-decoration-none text-danger small d-block mt-2">
+          Total Inquiries <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+	
+	<div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="card border-start border-danger border-4 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title text-muted">Inquiries(This Month)</h5>
+            <h3 class="fw-bold mb-0">${thisMonthInquiryCount}</h3>
+          </div>
+          <i class="bi bi-chat-dots-fill fs-1 text-danger"></i>
+        </div>
+        <a href="adminlistinquiry" class="stretched-link text-decoration-none text-danger small d-block mt-2">
+          Total Inquiries <i class="bi bi-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--end::Dashboard Cards-->
+
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">
             <!--begin::Row-->
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="card mb-4">
-                  <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                      <h3 class="card-title">Users Registration  </h3>
-                      <a
-                        href="javascript:void(0);"
-                        class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                        >View Report</a
-                      >
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="d-flex">
-                      <p class="d-flex flex-column">
-                        <span class="fw-bold fs-5">${totalUsers}</span> <span>Visitors Over Time</span>
-                      </p>
-                       
+            <div class="row" style="min-height: 400px;">
+			        <div class="col-12 mb-3">
+			          <h3 class="mb-0">Pending Vehicle List</h3>
+			        </div>
+                  <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Download Button -->
+              <div class="mb-3">
+                <button class="btn btn-outline-primary" onclick="downloadCSV('pending-vehicles.csv')">
+                  <i class="fas fa-download me-1"></i> Download CSV
+                </button>
+              </div>
 
-                      <p class="ms-auto d-flex flex-column text-end">
-                        <span class="text-success"> <i class="bi bi-arrow-up"></i> 12.5% </span>
-                        <span class="text-secondary">Since last week</span>
-                      </p>
-                    </div>
-                    <div class="row chart-container">
-			                <div class="position-relative mb-4">
-			                    <canvas id="usersChart"></canvas>
-			                </div>
-			               
-			         </div>
-                    <!-- /.d-flex -->
-                    <div class="position-relative mb-4"><div id="visitors-chart"></div></div>
-                    <div class="d-flex flex-row justify-content-end">
-                      <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> This Week
-                      </span>
-                      <span> <i class="bi bi-square-fill text-secondary"></i> Last Week </span>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.card -->
-                <div class="card mb-4">
-                  <div class="card-header border-0">
-                    <h3 class="card-title">Pending Vehicle Approvals</h3>
-                    <div class="card-tools">
-                      <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-download"></i> </a>
-                      <a href="#" class="btn btn-tool btn-sm"> <i class="bi bi-list"></i> </a>
-                    </div>
-                  </div>
-                  <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
+              <!-- Vehicle Table -->
+              <div class="table-responsive">
                   	
                     <table id="pendingVehicleTable" class="table table-striped align-middle">
                        <thead>
@@ -230,14 +268,13 @@
                                 <td>${v.make}</td>
                                 <td>₹${v.price}</td>
                                 <td><span class="badge bg-secondary">${v.vehicleStatus}</span></td>
-                                <td class="text-center">
-                                    <a href="/admin/approve-vehicle/${v.vehicleId}" class="btn btn-success btn-sm me-1">
-                                        <i class="fas fa-check"></i> Approve
-                                    </a>
-                                    <a href="/admin/reject-vehicle/${v.vehicleId}" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-times"></i> Reject
-                                    </a>
-                                </td>
+                                 <td>
+								  <div class="d-flex justify-content-center flex-wrap gap-1">
+								    <a href="adminviewvehicle?id=${v.vehicleId}" class="btn btn-sm btn-info me-1">View</a>
+								    <a href="/admin/approve-vehicle/${v.vehicleId}" class="btn btn-sm btn-success me-1">Approve</a>
+								    <a href="/admin/reject-vehicle/${v.vehicleId}" class="btn btn-sm btn-danger">Reject</a>
+								  </div>
+								</td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -248,42 +285,14 @@
                 <!-- /.card -->
               </div>
               <!-- /.col-md-6 -->
-              <div class="col-lg-6">
-                <div class="card mb-4">
-                  <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                      <h3 class="card-title">Sales</h3>
-                      <a
-                        href="javascript:void(0);"
-                        class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                        >View Report</a
-                      >
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="d-flex">
-                      <p class="d-flex flex-column">
-                        <span class="fw-bold fs-5">Vehicle Registered</span>
-                      </p>
-                      <p class="ms-auto d-flex flex-column text-end">
-                        <span class="text-success"> <i class="bi bi-arrow-up"></i> 33.1% </span>
-                        <span class="text-secondary">Since Past Year</span>
-                      </p>
-                    </div>
-                    <div class="position-relative mb-4">
-                    	<canvas id="vehiclesChart"></canvas>
-                	</div>
-                    
-                    <!-- /.d-flex -->
-                    <div class="position-relative mb-4"><div id="sales-chart"></div></div>
-                    <div class="d-flex flex-row justify-content-end">
-                      <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> This year
-                      </span>
-                      <span> <i class="bi bi-square-fill text-secondary"></i> Last year </span>
-                    </div>
-                  </div>
-                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+             </main>
+             
 
       <!--end::App Main-->
       <!--begin::Footer-->
@@ -294,9 +303,28 @@
     <!--begin::Script-->
     <!-- Bootstrap JS -->
 
-<!-- Chart Data Scripts -->
-	<!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Your DataTable init -->
+<script>
+  $(document).ready(function () {
+    $('#pendingVehicleTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true
+    });
+  });
+</script>
 
     
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
@@ -340,56 +368,7 @@
         }
       });
       
-      <!-- Chart Data Scripts -->
-      const usersChart = new Chart(document.getElementById('usersChart'), {
-          type: 'line',
-          data: {
-              labels: [${userChartMonths}], // e.g. "JAN","FEB"
-              datasets: [{
-                  label: 'User Registrations',
-                  data: [${userChartCounts}], // e.g. 5, 10, 15
-                  borderColor: '#007bff',
-                  backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                  fill: true,
-                  tension: 0.3
-              }]
-          },
-          options: {
-              responsive: true
-          }
-      });
-
-
-       // Vehicle Chart
-          new Chart(document.getElementById('vehiclesChart'), {
-              type: 'bar',
-              data: {
-                  labels: [${vehicleLabels}],
-                  datasets: [{
-                      label: 'Vehicles by Type',
-                      data: [${vehicleData}],
-                      backgroundColor: ['#007bff', '#ffc107', '#28a745', '#dc3545']
-                  }]
-              },
-              options: { responsive: true }
-          });
-
-
-          new Chart(document.getElementById('inquiriesChart'), {
-              type: 'doughnut',
-              data: {
-                  labels: ['Pending', 'Approved', 'Rejected'],
-                  datasets: [{
-                      data: [${inquiryData}],
-                      backgroundColor: ['#ffc107', '#28a745', '#dc3545'],
-                      borderWidth: 1
-                  }]
-              },
-              options: {
-                  responsive: true,
-                  cutout: '60%'
-              }
-          });
+      
           
           function downloadCSV(filename) {
               const table = document.getElementById("pendingVehicleTable");

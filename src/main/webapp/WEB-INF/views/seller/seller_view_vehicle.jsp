@@ -69,73 +69,117 @@
       <%@ include file="sidebar.jsp" %>
       <!--end::Sidebar-->
       <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <div class="row">
+     <main class="app-main">
+  <div class="app-content-header py-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+
+          <!-- Vehicle Details Card -->
+          <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0">${vehicle.make} ${vehicle.model} - Full Details</h4>
+            </div>
+
+            <div class="card-body">
+
+              <!-- Vehicle Image -->
+              <div class="text-center mb-4">
+                <h5 class="text-muted">Vehicle Picture</h5>
+                <img src="${vehicle.carPicPath}" alt="Vehicle Image" class="img-fluid rounded" style="max-height: 300px;">
+              </div>
+
+              <!-- Vehicle Specs Table -->
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <tbody>
+                    <tr><th>Make</th><td>${vehicle.make}</td></tr>
+                    <tr><th>Model</th><td>${vehicle.model}</td></tr>
+                    <tr><th>Type</th><td>${vehicle.vehicleType}</td></tr>
+                    <tr><th>Year</th><td>${vehicle.year}</td></tr>
+                    <tr><th>Variant</th><td>${vehicle.variant}</td></tr>
+                    <tr><th>Mileage</th><td>${vehicle.mileage} km/l</td></tr>
+                    <tr><th>Fuel Type</th><td>${vehicle.fuelType}</td></tr>
+                    <tr><th>Transmission</th><td>${vehicle.transmissionType}</td></tr>
+                    <tr><th>Price</th><td>₹ ${vehicle.price}</td></tr>
+                    <tr><th>Color</th><td>${vehicle.color}</td></tr>
+                    <tr><th>Seats</th><td>${vehicle.seats}</td></tr>
+                    <tr><th>KMs Driven</th><td>${vehicle.kmsDriven}</td></tr>
+                    <tr><th>RTO</th><td>${vehicle.rTO}</td></tr>
+                    <tr><th>Ownership</th><td>${vehicle.ownerShip}</td></tr>
+                    <tr><th>Engine Displacement</th><td>${vehicle.engineDisplacement}</td></tr>
+                    <tr><th>Airbags</th><td>${vehicle.numberofBags}</td></tr>
+                    <tr><th>Description</th><td>${vehicle.description}</td></tr>
+                    <tr><th>Status</th><td>${vehicle.status}</td></tr>
+                    <tr><th>Registration No.</th><td>${vehicle.registrationNum}</td></tr>
+                    <tr><th>Registration Year</th><td>${vehicle.registrationYear}</td></tr>
+                    <tr>
+                      <th>Insurance</th>
+                      <td>
+                        <c:choose>
+                          <c:when test="${not empty vehicle.insurance}">
+                            ${vehicle.insurance.insuranceType}
+                          </c:when>
+                          <c:otherwise>No insurance available</c:otherwise>
+                        </c:choose>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Features</th>
+                      <td>
+                        <c:forEach var="f" items="${vehicle.featuresEntities}" varStatus="status">
+                          ${f.featureName}<c:if test="${!status.last}">, </c:if>
+                        </c:forEach>
+                      </td>
+                    </tr>
+                    <tr><th>Listing Date</th><td>${vehicle.listingDate}</td></tr>
+                    <tr><th>Vehicle Status</th><td>${vehicle.vehicleStatus}</td></tr>
+                    <tr><th>User ID</th><td>${vehicle.userId}</td></tr>
+                    <tr><th>State</th><td>${vehicle.state.stateName}</td></tr>
+                    <tr><th>City</th><td>${vehicle.city.cityName}</td></tr>
+                    <tr><th>Area</th><td>${vehicle.area.areaName}</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="mt-3 d-flex gap-2">
+                
+                <a href="sellereditvehicle?id=${vehicle.vehicleId}" class="btn btn-primary">
+                  <i class="bi bi-pencil-square me-1"></i> Edit Vehicle
+                </a>
+              </div>
+
+              <!-- Reviews Section -->
+              <div class="mt-5">
+                <h4>Reviews</h4>
+                <c:choose>
+                  <c:when test="${empty reviews}">
+                    <p>No reviews yet. Be the first to review!</p>
+                  </c:when>
+                  <c:otherwise>
+                    <c:forEach var="review" items="${reviews}">
+                      <div class="card p-3 mb-2">
+                        <strong>Rating:</strong> ${review.rating}/5 <br>
+                        <strong>Comment:</strong> ${review.comment}
+                      </div>
+                    </c:forEach>
+                  </c:otherwise>
+                </c:choose>
+              </div>
+
              
-<div class="card-body table-responsive p-0">
-<table class="table table-bordered">
-    <tr>
-        <!-- Sidebar -->
-       
 
-        <!-- Main Content -->
-        <td width="80%" valign="top">
-            <h2>${vehicle.make} ${vehicle.model} Full Details</h2>
+            </div>
+          </div>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th colspan="2" style="text-align:center">Vehicle Picture</th>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align:center">
-                        <img src="${vehicle.carPicPath}" alt="Vehicle Image" width="400" height="250"/>
-                    </td>
-                </tr>
-
-                <tr><td><b>Make</b></td><td>${vehicle.make}</td></tr>
-                <tr><td><b>Model</b></td><td>${vehicle.model}</td></tr>
-                <tr><td><b>Type</b></td><td>${vehicle.vehicleType}</td></tr>
-                <tr><td><b>Year</b></td><td>${vehicle.year}</td></tr>
-                <tr><td><b>Variant</b></td><td>${vehicle.variant}</td></tr>
-                <tr><td><b>Mileage</b></td><td>${vehicle.mileage} km/l</td></tr>
-                <tr><td><b>Fuel Type</b></td><td>${vehicle.fuelType}</td></tr>
-                <tr><td><b>Transmission</b></td><td>${vehicle.transmissionType}</td></tr>
-                <tr><td><b>Price</b></td><td>₹ ${vehicle.price}</td></tr>
-                <tr><td><b>Color</b></td><td>${vehicle.color}</td></tr>
-                <tr><td><b>Seats</b></td><td>${vehicle.seats}</td></tr>
-                <tr><td><b>KMs Driven</b></td><td>${vehicle.kmsDriven}</td></tr>
-                <tr><td><b>RTO</b></td><td>${vehicle.rTO}</td></tr>
-                <tr><td><b>Ownership</b></td><td>${vehicle.ownerShip}</td></tr>
-                <tr><td><b>Engine Displacement</b></td><td>${vehicle.engineDisplacement}</td></tr>
-                <tr><td><b>Airbags</b></td><td>${vehicle.numberofBags}</td></tr>
-                <tr><td><b>Description</b></td><td>${vehicle.description}</td></tr>
-                <tr><td><b>Status</b></td><td>${vehicle.status}</td></tr>
-                <tr><td><b>Registration No.</b></td><td>${vehicle.registrationNum}</td></tr>
-                <tr><td><b>Registration Year</b></td><td>${vehicle.registrationYear}</td></tr>
-                <tr><td><b>Insurance</b></td><td>${vehicle.insurance}</td></tr>
-                <tr><td><b>Features (String)</b></td><td>${vehicle.features}</td></tr>
-                <tr><td><b>Listing Date</b></td><td>${vehicle.listingDate}</td></tr>
-                <tr><td><b>Vehicle Status</b></td><td>${vehicle.vehicleStatus}</td></tr>
-                <tr><td><b>User ID</b></td><td>${vehicle.userId}</td></tr>
-                <tr><td><b>State ID</b></td><td>${vehicle.stateId}</td></tr>
-                <tr><td><b>City ID</b></td><td>${vehicle.cityId}</td></tr>
-                <tr><td><b>Area ID</b></td><td>${vehicle.areaId}</td></tr>
-            </table>
-
-            <br/>
-            <a href="sellereditvehicle?id=${vehicle.vehicleId}" class="btn btn-primary btn-sm"> Edit</a>
-        </td>
-    </tr>
-</table>
-</div>
-</div>
-</div>
-</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
+
+
 </div>
 
  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

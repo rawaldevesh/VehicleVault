@@ -50,7 +50,7 @@
             <div class="mt-3">
                 <p class="profile-detail"><strong>Email:</strong> ${user.email}</p>
                 <p class="profile-detail"><strong>Phone:</strong> ${user.contactNum}</p>
-                <p class="profile-detail"><strong>City:</strong> ${user.city}</p>
+                
                 <p class="profile-detail"><strong>Born Year:</strong> ${user.bornYear}</p>
                 <p class="profile-detail"><strong>Gender:</strong> ${user.gender}</p>
                 

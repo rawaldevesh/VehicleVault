@@ -120,10 +120,7 @@
                                 <label for="bornYear" class="form-label">Born Year:</label>
                                 <input type="number" id="bornYear" name="bornYear" class="form-control" min="1900" max="2024" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="city" class="form-label">City:</label>
-                                <input type="text" id="city" name="city" class="form-control" required>
-                            </div>
+                           
                             <div class="mb-3">
                                 <label for ="profilePic" class="form-label">Profile Pic:</label>
                                 <input type="file" id="profilePic" name="profilePic" class="form-control" placeholder = "ProfilePic only .png and .jpg" required>

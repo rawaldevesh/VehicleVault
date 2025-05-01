@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="profile" class="nav-link ">
+          <a href="buyerviewprofile?id=${sessionScope.user.userId}" class="nav-link ">
            
             <p>profile</p>
           </a>

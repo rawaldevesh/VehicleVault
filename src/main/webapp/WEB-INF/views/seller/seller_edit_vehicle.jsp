@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,65 +70,234 @@
       <!--end::Sidebar-->
       <!--begin::App Main-->
       <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Vehicle List</h3></div>
-
-<div class="container mt-4">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Add New Vehicle</h4>
+  <div class="app-content-header py-4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h3 class="mb-0">Vehicle List</h3>
         </div>
-        <div class="card-body">
+      </div>
 
+      <div class="container mt-4">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Edit Vehicle</h4>
+          </div>
+          <div class="card-body">
             <form action="sellerupdatevehicle" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="vehicleId" value="${vehicle.vehicleId}">
 
-                <p>Make: <input type="text" name="make" value="${vehicle.make}" required></p>
-                <p>Vehicle Type: <input type="text" name="vehicleType" value="${vehicle.vehicleType}" required></p>
-                <p>Model: <input type="text" name="model" value="${vehicle.model}" required></p>
-                <p>Vehicle Picture: <input type="file" name="carPic"></p>
-                <p>Year: <input type="number" name="year" value="${vehicle.year}" required></p>
-                <p>Variant: <input type="text" name="variant" value="${vehicle.variant}" required></p>
-                <p>Mileage: <input type="number" step="0.1" name="mileage" value="${vehicle.mileage}" required></p>
-                <p>Fuel Type: <input type="text" name="fuelType" value="${vehicle.fuelType}" required></p>
-                <p>Transmission Type: <input type="text" name="transmissionType" value="${vehicle.transmissionType}" required></p>
-                <p>Price: <input type="number" step="0.01" name="price" value="${vehicle.price}" required></p>
-                <p>Color: <input type="text" name="color" value="${vehicle.color}" required></p>
-                <p>Description: <textarea name="description" rows="3">${vehicle.description}</textarea></p>
-                <p>Status: <input type="text" name="status" value="${vehicle.status}" required></p>
-                <p>Listing Date: <input type="date" name="listingDate" value="${vehicle.listingDate}" required></p>
-                <p>Registration Number: <input type="text" name="registrationNum" value="${vehicle.registrationNum}" required></p>
-                <p>User ID: <input type="number" name="userId" value="${vehicle.userId}" required></p>
-                <p>City ID: <input type="number" name="cityId" value="${vehicle.cityId}" required></p>
-                <p>Area ID: <input type="number" name="areaId" value="${vehicle.areaId}" required></p>
-                <p>State ID: <input type="number" name="stateId" value="${vehicle.stateId}" required></p>
-                <p>Registration Year: <input type="text" name="registrationYear" value="${vehicle.registrationYear}" required></p>
-                <p>Insurance: <input type="text" name="insurance" value="${vehicle.insurance}" required></p>
-                <p>Features: <input type="text" name="features" value="${vehicle.features}" required></p>
-                <p>Seats: <input type="text" name="seats" value="${vehicle.seats}" required></p>
-                <p>Kms Driven: <input type="text" name="kmsDriven" value="${vehicle.kmsDriven}" required></p>
-                <p>RTO: <input type="text" name="rTO" value="${vehicle.rTO}" required></p>
-                <p>Ownership: <input type="text" name="ownerShip" value="${vehicle.ownerShip}" required></p>
-                <p>Engine Displacement: <input type="text" name="engineDisplacement" value="${vehicle.engineDisplacement}" required></p>
-                <p>Number of Air Bags: <input type="text" name="numberofBags" value="${vehicle.numberofBags}" required></p>
+              <input type="hidden" name="vehicleId" value="${vehicle.vehicleId}">
+				<input type="hidden" name="listingDate" value="<%= java.time.LocalDate.now() %>">
+                <input type="hidden" name="userId" value="${sessionScope.userId}">
+				
+              <div class="row g-3">
+                <!-- Column 1 -->
+                <div class="col-md-6">
+                  <label class="form-label">Make</label>
+                  <input type="text" class="form-control" name="make" value="${vehicle.make}" required>
 
-                <p>
-                    <input type="submit" value="Update Vehicle">
-                    <a href="sellervehiclelist">Cancel</a>
-                </p>
+                  <label class="form-label mt-3">Model</label>
+                  <input type="text" class="form-control" name="model" value="${vehicle.model}" required>
+
+                  <label class="form-label mt-3">Vehicle Type</label>
+                  <input type="text" class="form-control" name="vehicleType" value="${vehicle.vehicleType}" required>
+
+                  <label class="form-label mt-3">Year</label>
+                  <input type="number" class="form-control" name="year" value="${vehicle.year}" required>
+
+                  <label class="form-label mt-3">Variant</label>
+                  <input type="text" class="form-control" name="variant" value="${vehicle.variant}" required>
+
+                  <label class="form-label mt-3">Mileage (km/l)</label>
+                  <input type="number" step="0.1" class="form-control" name="mileage" value="${vehicle.mileage}" required>
+
+                  <div class="col-md-4">
+					    <label class="form-label">Fuel Type</label>
+					    <select name="fuelType" class="form-select" required>
+					        <option value="Petrol" <c:if test="${vehicle.fuelType == 'Petrol'}">selected</c:if>>Petrol</option>
+					        <option value="Diesel" <c:if test="${vehicle.fuelType == 'Diesel'}">selected</c:if>>Diesel</option>
+					        <option value="Electric" <c:if test="${vehicle.fuelType == 'Electric'}">selected</c:if>>Electric</option>
+					        <option value="Hybrid" <c:if test="${vehicle.fuelType == 'Hybrid'}">selected</c:if>>Hybrid</option>
+					    </select>
+					</div>
+
+                  <div class="col-md-4">
+					    <label class="form-label">Transmission Type</label>
+					    <select name="transmissionType" class="form-select" required>
+					        <option value="Manual" <c:if test="${vehicle.transmissionType == 'Manual'}">selected</c:if>>Manual</option>
+					        <option value="Automatic" <c:if test="${vehicle.transmissionType == 'Automatic'}">selected</c:if>>Automatic</option>
+					    </select>
+					</div>
+
+                  <label class="form-label mt-3">Price (₹)</label>
+                  <input type="number" step="0.01" class="form-control" name="price" value="${vehicle.price}" required>
+
+                  <label class="form-label mt-3">Color</label>
+                  <input type="text" class="form-control" name="color" value="${vehicle.color}" required>
+
+                  <label class="form-label mt-3">Seats</label>
+                  <input type="text" class="form-control" name="seats" value="${vehicle.seats}" required>
+
+                  <label class="form-label mt-3">KMs Driven</label>
+                  <input type="text" class="form-control" name="kmsDriven" value="${vehicle.kmsDriven}" required>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="col-md-6">
+                  <!-- Vehicle Picture -->
+				    <div class="col-md-6">
+				        <label class="form-label">Vehicle Picture</label>
+				        <!-- Show existing car picture if it exists -->
+				        <div>
+				            <img src="${vehicle.carPicPath}" alt="Vehicle Image" width="150" height="100" class="img-thumbnail mb-3" />
+				        </div>
+				        <!-- Allow the user to upload a new image -->
+				        <input type="file" class="form-control" name="carPic">
+				    </div>
+
+                  <label class="form-label mt-3">Description</label>
+                  <textarea class="form-control" name="description" rows="3">${vehicle.description}</textarea>
+
+                 <div class="col-md-6">
+					    <label class="form-label">Status</label>
+					    <select name="status" class="form-select" required>
+					        <option value="Available" <c:if test="${vehicle.status == 'Available'}">selected</c:if>>Available</option>
+					        <option value="Sold" <c:if test="${vehicle.status == 'Sold'}">selected</c:if>>Sold</option>
+					    </select>
+					</div>
+
+                  <label class="form-label mt-3">Listing Date</label>
+                  <input type="date" class="form-control" name="listingDate" value="${vehicle.listingDate}" required>
+
+                  <label class="form-label mt-3">Registration Number</label>
+                  <input type="text" class="form-control" name="registrationNum" value="${vehicle.registrationNum}" required>
+
+                  <label class="form-label mt-3">Registration Year</label>
+                  <input type="date" class="form-control" name="registrationYear" value="${vehicle.registrationYear}" required>
+<div class="col-md-4">
+    <label class="form-label">Insurance</label>
+    <select name="insuranceId" class="form-select" required>
+        <c:forEach items="${allInsurance}" var="i">
+            <option value="${i.insuranceId}" 
+                <c:if test="${i.insuranceId == vehicle.insurance.insuranceId}">selected</c:if>>
+                ${i.insuranceType}
+            </option>
+        </c:forEach>
+    </select>
+</div>
+
+
+
+
+
+
+<!-- Features --><!-- Edit Vehicle JSP: features section -->
+<div class="col-md-6 mb-3">
+    <label class="form-label">Features</label>
+    <div class="form-check">
+        <c:forEach var="f" items="${allFeatures}">
+            <c:set var="isChecked" value="false" />
+            <c:forEach var="vFeature" items="${vehicle.featuresEntities}">
+                <c:if test="${vFeature.featureId == f.featureId}">
+                    <c:set var="isChecked" value="true" />
+                </c:if>
+            </c:forEach>
+
+            <div class="form-check mb-1">
+                <input class="form-check-input" type="checkbox" name="featureIds" 
+                       value="${f.featureId}" <c:if test="${isChecked}">checked</c:if>>
+                <label class="form-check-label">${f.featureName}</label>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+
+
+
+
+
+<div class="col-md-4">
+    <label class="form-label">Ownership</label>
+    <select name="ownerShip" class="form-select" required>
+        <option value="First Hand" <c:if test="${vehicle.ownerShip == 'First Hand'}">selected</c:if>>First Hand</option>
+        <option value="Second Hand" <c:if test="${vehicle.ownerShip == 'Second Hand'}">selected</c:if>>Second Hand</option>
+        <option value="Third Hand" <c:if test="${vehicle.ownerShip == 'Third Hand'}">selected</c:if>>Third Hand</option>
+    </select>
+</div>
+
+                  <label class="form-label mt-3">RTO</label>
+                  <input type="text" class="form-control" name="rTO" value="${vehicle.rTO}" required>
+
+                  <label class="form-label mt-3">Engine Displacement</label>
+                  <input type="text" class="form-control" name="engineDisplacement" value="${vehicle.engineDisplacement}" required>
+
+                  <label class="form-label mt-3">Number of Air Bags</label>
+                  <input type="text" class="form-control" name="numberofBags" value="${vehicle.numberofBags}" required>
+                </div>
+
+                <!-- Location and User Info -->
+                <!-- Location and User Info -->
+				<div class="col-md-4">
+				    <label class="form-label">State</label>
+				    <select name="stateId" id="stateId" class="form-select" onchange="getCityName()" required>
+				        <option value="-1">Select State</option>
+				        <!-- Loop through all available states and set the selected state -->
+				        <c:forEach items="${allState}" var="s">
+				            <option value="${s.stateId}" 
+				                    <c:if test="${s.stateId == vehicle.state.stateId}">selected</c:if>>
+				                ${s.stateName}
+				            </option>
+				        </c:forEach>
+				    </select>
+				</div>
+
+                
+                <!-- Location and User Info -->
+				<div class="col-md-4">
+				    <label class="form-label">City</label>
+				    <select name="cityId" id="cityId" class="form-select" onchange="getAreaName()" required>
+				        <option value="-1">Select City</option>
+				        <!-- Loop through all available cities and set the selected city -->
+				        <c:forEach items="${allCity}" var="c">
+				            <option value="${c.cityId}" 
+				                    <c:if test="${c.cityId == vehicle.city.cityId}">selected</c:if>>
+				                ${c.cityName}
+				            </option>
+				        </c:forEach>
+				    </select>
+				</div>
+				<div class="col-md-4">
+				    <label class="form-label">Area</label>
+				    <select name="areaId" id="areaId" class="form-select" required>
+				        <option value="-1">Select Area</option>
+				        <!-- Loop through all available areas and set the selected area -->
+				        <c:forEach items="${allArea}" var="a">
+				            <option value="${a.areaId}" 
+				                    <c:if test="${a.areaId == vehicle.area.areaId}">selected</c:if>>
+				                ${a.areaName}
+				            </option>
+				        </c:forEach>
+				    </select>
+				</div>
+				
+
+                
+              </div>
+
+              <!-- Submit -->
+              <div class="mt-4">
+                <button type="submit" class="btn btn-success">Update Vehicle</button>
+                <a href="sellervehiclelist" class="btn btn-secondary ms-2">Cancel</a>
+              </div>
             </form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </main>
+
 </div>
 
 </table>

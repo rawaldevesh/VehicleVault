@@ -23,6 +23,7 @@
     />
     <!--end::Primary Meta Tags-->
     <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.min.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
@@ -71,67 +72,100 @@
       <%@ include file="sidebar.jsp" %>
       <!--end::Sidebar-->
       <!--begin::App Main-->
-      <main class="app-main">
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">your Vehicle List</h3></div>
-             <div class="card-body table-responsive p-0">
-                  	<button class="btn btn-outline-primary mb-3" onclick="downloadCSV('pending-vehicles.csv')">
-					    <i class="fas fa-download me-1"></i> Download CSV
-					</button>
-                  <div class="card-body">
-                    <table id="listVehicleTable" class="table table-bordered">
-            
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Make</th>
-                        <th>Model</th>
-                        <th>Year</th>
-                        <th>Variant</th>
-                        <th>Fuel Type</th>
-                        <th>Price (₹)</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="vehicle" items="${listVehicle}">
-                    <c:if test="${vehicle.userId == sessionScope.user.userId}">
-                        <tr>
-                            <td>${vehicle.vehicleId}</td>
-                            <td>${vehicle.make}</td>
-                            <td>${vehicle.model}</td>
-                            <td>${vehicle.year}</td>
-                            <td>${vehicle.variant}</td>
-                            <td>${vehicle.fuelType}</td>
-                            <td>${vehicle.price}</td>
-                            <td>${vehicle.vehicleStatus}</td>
-                            <td>
-                                <a href="sellerviewvehicle?id=${vehicle.vehicleId}">View</a> |
-                                <a href="sellereditvehicle?id=${vehicle.vehicleId}">Edit</a> |
-                                <a href="sellerdeletevehicle?id=${vehicle.vehicleId}" onclick="return confirm('Are you sure?')">Delete</a>
-                           		
-                            </td>
-                            
-                        </tr>
-                        </c:if>
-                    </c:forEach>
-                    
-                </tbody>
-            </table>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </main>
-            </div>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<main class="app-main">
+  <!--begin::App Content Header-->
+  <div class="app-content-header">
+    <div class="container-fluid">
+      <div class="row" style="min-height: 400px;">
+        <div class="col-12 mb-3">
+          <h3 class="mb-0">Vehicle List</h3>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- Download Button -->
+              <div class="mb-3">
+                <button class="btn btn-outline-primary" onclick="downloadCSV('pending-vehicles.csv')">
+                  <i class="fas fa-download me-1"></i> Download CSV
+                </button>
+              </div>
+
+      <!--begin::Card-->
+      <div class="table-responsive">
+          <table id="listVehicleTable" class="table table-bordered mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Variant</th>
+                <th>Fuel Type</th>
+                <th>Price (₹)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="vehicle" items="${listVehicle}">
+                <c:if test="${vehicle.userId == sessionScope.user.userId}">
+                  <tr>
+                    <td>${vehicle.vehicleId}</td>
+                    <td>${vehicle.make}</td>
+                    <td>${vehicle.model}</td>
+                    <td>${vehicle.year}</td>
+                    <td>${vehicle.variant}</td>
+                    <td>${vehicle.fuelType}</td>
+                    <td>${vehicle.price}</td>
+                    <td>${vehicle.vehicleStatus}</td>
+                    <td>
+                      <a href="sellerviewvehicle?id=${vehicle.vehicleId}" class="btn btn-info btn-sm me-1">View</a>
+                      <a href="sellereditvehicle?id=${vehicle.vehicleId}" class="btn btn-primary btn-sm me-1">Edit</a>
+                      <a href="sellerdeletevehicle?id=${vehicle.vehicleId}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                  </tr>
+                </c:if>
+              </c:forEach>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      
+      <!--end::Card-->
+    </div>
+  </div>
+</main>
+
+ </div>
+
+
+
+<!-- jQuery (first!) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+<!-- DataTables Bootstrap integration -->
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Your DataTable init -->
+<script>
+  $(document).ready(function () {
+    $('#listVehicleTable').DataTable({
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true
+    });
+  });
+</script>
 
     
     <!--begin::Third Party Plugin(OverlayScrollbars)-->

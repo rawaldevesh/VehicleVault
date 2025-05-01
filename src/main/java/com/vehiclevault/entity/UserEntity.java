@@ -28,7 +28,7 @@ public class UserEntity {
 
     private String password;
     private String contactNum;
-    private String city;
+  
     private String bornYear;
     private String gender;
     private String otp;
@@ -69,9 +69,7 @@ public class UserEntity {
     public String getContactNum() { return contactNum; }
     public void setContactNum(String contactNum) { this.contactNum = contactNum; }
 
-    public String getCity() { return city; }
-    public void setCity(String city) { this.city = city; }
-
+    
     public String getBornYear() { return bornYear; }
     public void setBornYear(String bornYear) { this.bornYear = bornYear; }
 
