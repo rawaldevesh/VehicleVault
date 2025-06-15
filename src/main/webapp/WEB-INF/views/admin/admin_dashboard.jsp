@@ -105,7 +105,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <h5 class="card-title text-muted">Total Buyers</h5>
+            <h5 class="card-title text-muted">Total Users</h5>
             <h3 class="fw-bold mb-0">${totalBuyers}</h3>
           </div>
           <i class="bi bi-people-fill fs-1 text-primary"></i>
