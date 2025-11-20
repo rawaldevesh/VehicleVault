@@ -194,39 +194,6 @@
         }
       });
       
-      <!-- Chart Data Scripts -->
-      const usersChart = new Chart(document.getElementById('usersChart'), {
-          type: 'line',
-          data: {
-              labels: [${userChartMonths}], // e.g. "JAN","FEB"
-              datasets: [{
-                  label: 'User Registrations',
-                  data: [${userChartCounts}], // e.g. 5, 10, 15
-                  borderColor: '#007bff',
-                  backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                  fill: true,
-                  tension: 0.3
-              }]
-          },
-          options: {
-              responsive: true
-          }
-      });
-      new Chart(document.getElementById('inquiriesChart'), {
-          type: 'doughnut',
-          data: {
-              labels: ['Pending', 'Approved', 'Rejected'],
-              datasets: [{
-                  data: [${inquiryData}],
-                  backgroundColor: ['#ffc107', '#28a745', '#dc3545'],
-                  borderWidth: 1
-              }]
-          },
-          options: {
-              responsive: true,
-              cutout: '60%'
-          }
-      });
       
     </script>
     <!--end::OverlayScrollbars Configure-->

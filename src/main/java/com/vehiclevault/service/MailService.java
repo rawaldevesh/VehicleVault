@@ -12,10 +12,10 @@ public class MailService {
 	JavaMailSender mailSender;
 
 	public void sendWelcomeMail(String email, String firstName) {
-		String subject = "Welcome to iGate";
+		String subject = "Welcome to Vehicle Vault!";
 		String body = "Hey " + firstName
 				+ ", We're excited to have you on board. If you have any questions, feel free to reach out – we’re here to help!";
-		String from = "tejasshah2k19@gmail.com";
+		String from = "golurawal10@gmail.com";
 
 		// logic
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -29,11 +29,12 @@ public class MailService {
 
 	}
 
-	public void sendOtpForForgetPassword(String email, String firstName,String otp) {
+	public void sendOtpForForgetPassword(String email, String firstName, String otp) {
 		String subject = "OTP for Resetpassword";
 		String body = "Hey " + firstName
-				+ ", It seems you have request for forget password, please use below otp for reset password.  If not then simply ignore the message!OTP:"+otp;
-		String from = "tejasshah2k19@gmail.com";
+				+ ", It seems you have request for forget password, please use below otp for reset password.  If not then simply ignore the message!OTP:"
+				+ otp;
+		String from = "golurawal10@gmail.com";
 
 		// logic
 		SimpleMailMessage message = new SimpleMailMessage();

@@ -24,85 +24,81 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SessionController {
-	
+
 	@Autowired
 	MailService serviceMail;
 
 	// signup.jsp
 	@Autowired
 	UserRepository repositoryUser;
-	
+
 	@Autowired
 	VehicleRepository repositoryVehicle;
 
 	@Autowired
 	PasswordEncoder encoder;
-	
+
 	@Autowired
 	CityRepository cityRepository;
 
-	
 	@Autowired
 	Cloudinary cloudinary;
 
-	@GetMapping(value = {"signup"}) //url 
+	@GetMapping(value = { "signup" }) // url
 	public String signup() {
 		return "Signup";
 	}
-	
-	
 
-	
 	@GetMapping("login")
 	public String login() {
 		return "Login";
 	}
-	
+
 	@PostMapping("saveuser")
-	public String saveuser(UserEntity userEntity, String confpassword, Model model,MultipartFile profilePic) {
+	public String saveuser(UserEntity userEntity, String confpassword, Model model, MultipartFile profilePic) {
 		if (!userEntity.getPassword().equals(confpassword)) {
-	        model.addAttribute("error", "Passwords do not match");
-	        return "Signup";
-	    }
-		
-		if(profilePic.getOriginalFilename().endsWith(".jpg") || profilePic.getOriginalFilename().endsWith(".png")) {
-			
-		}
-		else {
+			model.addAttribute("error", "Passwords do not match");
 			return "Signup";
 		}
-		
+
+		if (profilePic.getOriginalFilename().endsWith(".jpg") || profilePic.getOriginalFilename().endsWith(".png")
+				|| profilePic.getOriginalFilename().endsWith(".jpeg")) {
+
+		} else {
+			return "Signup";
+		}
+
 		try {
-		 Map result =   cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
-		
-		 userEntity.setProfilePicPath(result.get("url").toString());
-		
-		} 
-		
+			Map result = cloudinary.uploader().upload(profilePic.getBytes(), ObjectUtils.emptyMap());
+
+			userEntity.setProfilePicPath(result.get("url").toString());
+
+		}
+
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		String encPassword = encoder.encode(userEntity.getPassword());
 		userEntity.setPassword(encPassword);
 		// memory
 		// bcrypt singleton -> single object -> autowired
-		
+
 		System.out.println(profilePic.getOriginalFilename());
 		repositoryUser.save(userEntity);
 		// send mail
 		serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());
 		return "redirect:/login";// jsp
-		
+
 	}
+
 	// open forgetpassword jsp
 	@GetMapping("forgetpassword")
 	public String forgetpassword() {
 		return "Forgetpassword";
 	}
-	
+
 	// submit on forgetpassword ->
 	@PostMapping("sendotp")
 	public String sendotp(String email, Model model) {
@@ -112,15 +108,14 @@ public class SessionController {
 			// email invalid
 			model.addAttribute("error", "Email not found");
 			return "Forgetpassword";
-		}
-		else {
+		} else {
 			// email valid
 			// send mail otp
 			// opt generate
 			// send mail otp
 			String otp = "";
 			otp = (int) (Math.random() * 1000000) + "";// 0.25875621458541
-			
+
 			UserEntity user = op.get();
 			user.setOtp(otp);
 			repositoryUser.save(user);// update otp for user
@@ -128,16 +123,15 @@ public class SessionController {
 		}
 		return "Chengepassword";
 	}
-	
-	
+
 	@PostMapping("authenticate")
 	public String authenticate(String email, String password, Model model, HttpSession session) {
-		
+
 		System.out.println(email);
 		System.out.println(password);
-		
+
 		Optional<UserEntity> op = repositoryUser.findByEmail(email);
-		
+
 		// select * from users where email = :email and password = :password
 		if (op.isPresent()) {
 			// true
@@ -148,42 +142,39 @@ public class SessionController {
 
 			if (ans) {
 				session.setAttribute("user", dbUser); // Store full user object in session
- // session -> user set
+				// session -> user set
 				if (dbUser.getRole().equals("ADMIN")) {
 
 					return "redirect:/admindashboard";
 				} else if (dbUser.getRole().equals("BUYER")) {
 
 					return "redirect:/buyerdashboard";
-				
-				}else if (dbUser.getRole().equals("SELLER")) {
-	                return "redirect:/sellerdashboard"; // Redirect to Seller Dashboard
-	            }
-				
+
+				} else if (dbUser.getRole().equals("SELLER")) {
+					return "redirect:/sellerdashboard"; // Redirect to Seller Dashboard
+				}
+
 				else {
 					model.addAttribute("error", "Please contact Admin with Error Code #0991");
 					return "Login";
 				}
 			}
-			
+
 		}
 		model.addAttribute("error", "Invalid Credentials");
 		return "Login";
-				
-	}		   
-	
+
+	}
+
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/login";// login url
 	}
-	
 
-
-	
 	@PostMapping("updatepassword")
 	public String updatepassword(String email, String password, String otp, Model model) {
-		
+
 		Optional<UserEntity> op = repositoryUser.findByEmail(email);
 		if (op.isEmpty()) {
 			model.addAttribute("error", "Invalid Data");
@@ -201,10 +192,8 @@ public class SessionController {
 				return "Changepassword";
 			}
 		}
-		model.addAttribute("msg","Password updated");
+		model.addAttribute("msg", "Password updated");
 		return "redirect:/login";
 	}
-	
-	
-	
+
 }
