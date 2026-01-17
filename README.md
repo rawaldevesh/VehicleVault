@@ -90,7 +90,7 @@ This project was developed as a **final-year college project** and is fully func
 ### 🔹 Database Setup
 ```sql
 CREATE DATABASE vehicle_vault;
-
+```
 ### 🔹 Configuration
 
 Update `application.properties`:
