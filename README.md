@@ -148,7 +148,7 @@ spring.datasource.password=YOUR_DB_PASSWORD
 ## 🧑‍💻 Author
 
 **Devesh Rawal**
-Java Developer Trainee
+Java Developer
 
 **Skills:**
 Java • Spring Boot • MySQL • Spring Security • MVC Architecture
