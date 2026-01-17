@@ -108,7 +108,7 @@ spring.datasource.password=YOUR_DB_PASSWORD
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/rawaldevesh/VehicleVault
+   git clone https://github.com/rawaldevesh/VehicleVault.git
    ```
 
 2. Open the project in **Spring Tool Suite**
