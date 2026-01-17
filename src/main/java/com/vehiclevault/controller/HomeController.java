@@ -23,7 +23,7 @@ public class HomeController {
 	@Autowired
 	VehicleRepository repositoryVehicle;
 	
-	@GetMapping(value = {"home", "/", "/vehiclevault"})
+	@GetMapping(value = {"home", "/", "/vehiclevault/"})
 	public String home(Model model) {
 	    List<VehicleEntity> vehicleList = repositoryVehicle.findByVehicleStatus("APPROVED");
 

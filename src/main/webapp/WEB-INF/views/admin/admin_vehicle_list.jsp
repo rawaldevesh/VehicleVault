@@ -162,6 +162,12 @@
 
 <!-- Your DataTable init -->
 <script>
+
+
+	var adminName = "${listVehicle}";
+
+
+
   $(document).ready(function () {
     $('#listVehicleTable').DataTable({
       paging: true,

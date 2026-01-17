@@ -155,6 +155,9 @@ public class SellerController {
 
 	     // Fetch existing user
 	     UserEntity existingUser = repositoryUser.findById(userEntity.getUserId()).orElse(null);
+	     
+	     
+	     
 
 	     if (existingUser == null) {
 	         model.addAttribute("error", "User not found.");
@@ -188,6 +191,12 @@ public class SellerController {
 	     existingUser.setContactNum(userEntity.getContactNum());
 	     existingUser.setGender(userEntity.getGender());
 	     existingUser.setRole(userEntity.getRole());
+	     
+	     
+	     
+	     String email = (String) userEntity.getEmail();
+	     
+	     System.out.print(email);
 	  
 
 	     // Update password only if a new password is provided

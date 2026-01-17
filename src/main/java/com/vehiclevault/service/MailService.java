@@ -1,5 +1,8 @@
 package com.vehiclevault.service;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,7 +14,11 @@ public class MailService {
 	@Autowired
 	JavaMailSender mailSender;
 
+
+	
 	public void sendWelcomeMail(String email, String firstName) {
+		
+		
 		String subject = "Welcome to Vehicle Vault!";
 		String body = "Hey " + firstName
 				+ ", We're excited to have you on board. If you have any questions, feel free to reach out – we’re here to help!";

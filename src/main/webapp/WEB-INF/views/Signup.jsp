@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +79,7 @@
                                 <label for="lastName" class="form-label">Last Name:</label>
                                 <input type="text" id="lastName" name="lastName" class="form-control" required>
                             </div>
+                            ${error}
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
                                 <input type="email" id="email" name="email" class="form-control" required>

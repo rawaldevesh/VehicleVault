@@ -164,6 +164,7 @@ public class AdminDashboardController {
     @GetMapping("/admin/approve-vehicle/{id}")
     public String approveVehicle(@PathVariable int id) {
         VehicleEntity vehicle = repositoryVehicle.findById(id).orElse(null);
+        
         if (vehicle != null) {
             vehicle.setVehicleStatus("APPROVED");
             repositoryVehicle.save(vehicle);
@@ -185,6 +186,7 @@ public class AdminDashboardController {
 	public String listInquiry(Model model) {
 		List<Object[]> listInquiry = repositoryInquiry.getAll(); // select *
 		model.addAttribute("listInquiry",listInquiry);
+		model.addAttribute(listInquiry);
 		return "admin/admin_list_inquiry";
 	}
 	

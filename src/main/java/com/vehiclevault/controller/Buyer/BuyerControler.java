@@ -120,25 +120,58 @@ public class BuyerControler {
 	    return "redirect:/buyersearchvehicle";
 	}
 	
-	 @GetMapping("buyerviewprofile")
-	    public String viewUser(@RequestParam("id") Integer userId, Model model) {
-	        UserEntity user = repositoryUser.findById(userId).orElse(null);
-	        model.addAttribute("user", user);  // This line was missing
-	        return "buyer/buyer_view_profile";   // Your JSP page
+
+	
+	@GetMapping("/buyerviewprofile")
+	public String viewBuyerProfile(
+	        @RequestParam("id") Integer userId,
+	        HttpSession session,
+	        Model model) {
+
+	    UserEntity loggedUser = (UserEntity) session.getAttribute("user");
+
+	    if (loggedUser == null) {
+	        return "redirect:/login";
 	    }
+
+	    // Role check
+	    if (!"BUYER".equals(loggedUser.getRole())) {
+	        return "redirect:/access-denied";
+	    }
+
+	    // OWNERSHIP check (this is what you missed)
+	    if (!loggedUser.getUserId().equals(userId)) {
+	        return "redirect:/access-denied";
+	    }
+
+	    model.addAttribute("user", loggedUser);
+	    return "buyer/buyer_view_profile";
+	}
+
+	 
+	
+
 	 
 	 @GetMapping("buyereditprofile")
 		public String editUser(@RequestParam("id") Integer userId, Model model) {
+		 
+		 
+		 
 		    UserEntity user = repositoryUser.findById(userId).orElse(null);
 		    
 		    if (user == null) {
 		        return "redirect:/sellerdashboard"; // If vehicle not found, redirect to list
+		    }
+		    if (!"BUYER".equals(user.getRole())){
+		        return "redirect:/access-denied";
 		    }
 		    
 		    model.addAttribute("user", user);
 		    
 		    return "buyer/buyer_edit_profile"; // JSP page for editing
 		}
+	 
+	 
 	 @PostMapping("buyerupdateprofile")
 	 public String updateUser(@ModelAttribute UserEntity userEntity,
 	                          @RequestParam("profilePic") MultipartFile profilePic,

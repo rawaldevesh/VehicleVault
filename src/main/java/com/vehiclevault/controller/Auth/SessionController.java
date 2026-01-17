@@ -1,15 +1,19 @@
 package com.vehiclevault.controller.Auth;
 
 import java.io.IOException;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
@@ -20,6 +24,7 @@ import com.vehiclevault.repository.UserRepository;
 import com.vehiclevault.repository.VehicleRepository;
 import com.vehiclevault.service.MailService;
 
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -54,13 +59,18 @@ public class SessionController {
 		return "Login";
 	}
 
+	
+	
+	
+	
+	
 	@PostMapping("saveuser")
 	public String saveuser(UserEntity userEntity, String confpassword, Model model, MultipartFile profilePic) {
 		if (!userEntity.getPassword().equals(confpassword)) {
 			model.addAttribute("error", "Passwords do not match");
 			return "Signup";
 		}
-
+		
 		if (profilePic.getOriginalFilename().endsWith(".jpg") || profilePic.getOriginalFilename().endsWith(".png")
 				|| profilePic.getOriginalFilename().endsWith(".jpeg")) {
 
@@ -86,9 +96,22 @@ public class SessionController {
 		// bcrypt singleton -> single object -> autowired
 
 		System.out.println(profilePic.getOriginalFilename());
+		
+		try {
 		repositoryUser.save(userEntity);
+		}
+		catch(DataIntegrityViolationException e) {
+			e.printStackTrace();
+			  model.addAttribute("error", "Email already registered");
+		        return "Signup";
+		}
 		// send mail
-		serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());
+		
+		 new Thread(() -> {
+//		        mailService.sendWelcomeMail(email, firstName);
+		        serviceMail.sendWelcomeMail(userEntity.getEmail(), userEntity.getFirstName());
+		    }).start();
+		 
 		return "redirect:/login";// jsp
 
 	}

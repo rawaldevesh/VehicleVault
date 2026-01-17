@@ -18,8 +18,8 @@ import jakarta.servlet.http.HttpSession;
 @Component
 public class LoginCheckFilter implements Filter {
 
-	ArrayList<String> publicURL = new ArrayList<>();
 
+	ArrayList<String> publicURL = new ArrayList<>();
 	public LoginCheckFilter() {
 		publicURL.add("/login");
 		publicURL.add("/signup");
@@ -34,14 +34,17 @@ public class LoginCheckFilter implements Filter {
 		publicURL.add("/hvehiclevault");
 		
 		
-		
-
+	
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		
+		//casting req
 		HttpServletRequest requestHttp = (HttpServletRequest) request;
-		String url = requestHttp.getRequestURI().toString();
+		
+		String url = requestHttp.getRequestURI().toString(); // url = port + uri req like localhost:/9999 = port and /home/profile = uri
+		
 		String uri = requestHttp.getRequestURI();
  
 		

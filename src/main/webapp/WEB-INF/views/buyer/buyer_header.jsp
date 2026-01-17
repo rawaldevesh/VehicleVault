@@ -44,7 +44,7 @@
          
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="profile" class="btn btn-default btn-flat">Profile</a>
+            <a href="buyerviewprofile?id=${sessionScope.user.userId}" class="btn btn-default btn-flat">Profile</a>
             <a href="logout" class="btn btn-default btn-flat float-end">Sign out</a>
           </li>
         </ul>

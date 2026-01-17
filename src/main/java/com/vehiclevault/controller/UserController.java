@@ -30,7 +30,10 @@ public class UserController {
 //		return "UserList";
 //	}
 	
-	
+	@GetMapping("access-denied")
+	public String accessDenied(){
+		return "Login";
+	}
 	
 	@GetMapping("profile")
 	public String profile() {
