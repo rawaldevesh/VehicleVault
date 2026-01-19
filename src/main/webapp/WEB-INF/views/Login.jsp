@@ -62,19 +62,32 @@
             <i class="fas fa-moon"></i>
         </span>
     </div>
+    
+ 
 
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card shadow-lg p-4">
+              
                 <h2 class="text-center mb-4">Login</h2>
                 <form action="authenticate" method="post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
                         <input type="email" id="email" name="email" class="form-control" required>
+                     <c:if test="${not empty error}">
+						    <div class="error-message">
+						        <p style="color: red">${error}</p>
+						    </div>
+					</c:if>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password:</label>
                         <input type="password" id="password" name="password" class="form-control" required>
+                     <c:if test="${not empty passwordError}">
+						    <div class="error-message">
+						        <p style="color: red">${passwordError}</p>
+						    </div>
+					</c:if>
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Login</button>

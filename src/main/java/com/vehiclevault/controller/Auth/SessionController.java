@@ -181,10 +181,13 @@ public class SessionController {
 					model.addAttribute("error", "Please contact Admin with Error Code #0991");
 					return "Login";
 				}
+			}else {
+				model.addAttribute("passwordError", "Invalid Password");
+				return "Login";
 			}
 
 		}
-		model.addAttribute("error", "Invalid Credentials");
+		model.addAttribute("error", "Invalid Username");
 		return "Login";
 
 	}

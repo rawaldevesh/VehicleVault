@@ -97,7 +97,7 @@ public class AdminDashboardController {
 	    UserEntity user = repositoryUser.findById(userId).orElse(null);
 	    
 	    if (user == null) {
-	        return "redirect:/adminlistuser"; // If vehicle not found, redirect to list
+	        return "redirect:/adminlistuser"; 
 	    }
 	    
 	    model.addAttribute("user", user);
@@ -209,9 +209,6 @@ public class AdminDashboardController {
 	    return "redirect:/adminlistinquiry"; // Redirect to vehicle list
 	}
 	
-	
-	
-
 	
 	
 	@GetMapping("adminlistvehicle")
